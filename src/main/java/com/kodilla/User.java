@@ -1,3 +1,5 @@
+package com.kodilla;
+
 import java.util.Random;
 
 public class User {
@@ -328,7 +330,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [color=" + color + "]";
+        return "com.kodilla.User [color=" + color + "]";
     }
 
 }
