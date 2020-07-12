@@ -5,9 +5,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+
+
 public class Field extends Rectangle {
 
     private int col, row = 0;
+    int position;
 
     public Field(Image image) {
         super(70, 70, new ImagePattern(image));
@@ -18,10 +21,11 @@ public class Field extends Rectangle {
         });
     }
 
-    public Field(int col, int row) {
+    public Field(int col, int row, int  position) {
         super(70, 70, new ImagePattern(new Image("circle.png",70,70,false,false)));
         this.col = col;
         this.row = row;
+        this.position = position;
 
         setOnMouseClicked(mouseEvent -> Controller.getController().clicked(this));
     }
@@ -32,5 +36,16 @@ public class Field extends Rectangle {
 
     public int getRow() {
         return row;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "position=" + position +
+                '}';
     }
 }
