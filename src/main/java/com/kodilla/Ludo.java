@@ -1,48 +1,26 @@
 package com.kodilla;
 
-//import javafx.application.Application;
-//import javafx.geometry.Orientation;
-//import javafx.geometry.Pos;
-//import javafx.scene.image.Image;
-//import javafx.scene.layout.*;
-//import javafx.scene.paint.ImagePattern;
-//import javafx.scene.text.Text;
-//import javafx.stage.Stage;
-//import javafx.scene.Scene;
-//import javafx.scene.paint.Color;
-//import javafx.geometry.Insets;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-
-
-
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 
-//import java.awt.*;
-
-import static com.kodilla.User.startGame;
+import static com.kodilla.Player.startGame;
 
 public class Ludo extends Application{
 
     private Image imageback = new Image("background1.png");
     private Image circle = new Image("circle.png",70,70,false,false);
-//    private Image circle = new Image("blue.png",70,70,false,false);
     private Image blue = new Image("blue.png",70,70,false,false);
     private Image red = new Image("red.png",70,70,false,false);
     private Image yellow = new Image("yellow.png",70,70,false,false);
@@ -54,10 +32,6 @@ public class Ludo extends Application{
     private FlowPane circles = new FlowPane(Orientation.HORIZONTAL);
     private Controller controller = Controller.getController();
 
-    private Button movePawn1Button = new Button("move pawn 1");
-    private Button movePawn2Button = new Button("move pawn 2");
-    private Button movePawn3Button = new Button("move pawn 3");
-    private Button movePawn4Button = new Button("move pawn 4");
 
     public static void main(String[] args) {
         launch(args);
@@ -70,51 +44,10 @@ public class Ludo extends Application{
         Background background = new Background(backgroundImage);
 
 
-
-        Label label = new Label("text");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.TOP_CENTER);
         grid.setPadding(new Insets(15, 15, 15, 15));
-      //  grid.setHgap(5.5);
-     //   grid.setVgap(5.5);
         grid.setBackground(background);
-
-        Field img = new Field(circle);
-        Field imgRed = new Field(red);
-        Field imgYellow = new Field(yellow);
-        Field imgBlue = new Field(blue);
-        Field imgGreen = new Field(green);
-        Field imgblack = new Field(black);
-
-      //  circles.getChildren().addAll(img,imgblack,imgBlue,imgGreen,imgRed,imgYellow);
-
-
-
-
-
-
-
-//        grid.addColumn(4,new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(yellow),new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(circle));
-//        grid.addColumn(5,new Field(circle),new Field(red),new Field(red),new Field(red),new Field(red),new Field(black),new Field(green),new Field(green),new Field(green),new Field(green),new Field(circle));
-//        grid.addColumn(6,new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(blue),new Field(circle),new Field(circle),new Field(circle),new Field(circle),new Field(circle));
-
-//        Field field04 = new Field(0, 4,1);
-//        grid.add(field04, 0, 4);
-//        controller.addField(field04);
-//
-//        Field field05 = new Field(0, 5,2);
-//        grid.add(field05, 0, 5);
-//        controller.addField(field05);
-//
-//        Field field06 = new Field(0, 6,3);
-//        grid.add(field06, 0, 6);
-//        controller.addField(field06);
-
-        grid.add(movePawn1Button,0,7);
-        grid.add(movePawn2Button,0,8);
-        grid.add(movePawn3Button,0,9);
-        grid.add(movePawn4Button,0,10);
-
 
         Field field1 = new Field(6,0,1);
         Field field2 = new Field(6,1,2);
@@ -249,10 +182,10 @@ public class Ludo extends Application{
         Field field94 = new Field(5,4,94);
 
 
-//        field91.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-//        field92.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-//        field93.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-//        field94.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field91.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field92.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field93.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field94.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
 
         grid.add(field91,5,1);
         grid.add(field92,5,2);
@@ -328,32 +261,32 @@ public class Ludo extends Application{
         field84.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
 
 
-        Field pawnBlue1 = new Field(new Image("blue pawn.png"));
-        Field pawnBlue2 = new Field(new Image("blue pawn.png"));
-        Field pawnBlue3 = new Field(new Image("blue pawn.png"));
-        Field pawnBlue4 = new Field(new Image("blue pawn.png"));
+//        Field pawnBlue1 = new Field(new Image("blue pawn.png"));
+//        Field pawnBlue2 = new Field(new Image("blue pawn.png"));
+//        Field pawnBlue3 = new Field(new Image("blue pawn.png"));
+//        Field pawnBlue4 = new Field(new Image("blue pawn.png"));
+//
+//        Field pawnRed1 = new Field(new Image("red pawn.png"));
+//        Field pawnRed2 = new Field(new Image("red pawn.png"));
+//        Field pawnRed3 = new Field(new Image("red pawn.png"));
+//        Field pawnRed4 = new Field(new Image("red pawn.png"));
+//
+//
+//        controller.addField(pawnBlue1);
+//        controller.addField(pawnBlue2);
+//        controller.addField(pawnBlue3);
+//        controller.addField(pawnBlue4);
+//
+//        controller.addField(pawnRed1);
+//        controller.addField(pawnRed2);
+//        controller.addField(pawnRed3);
+//        controller.addField(pawnRed4);
 
-        Field pawnRed1 = new Field(new Image("red pawn.png"));
-        Field pawnRed2 = new Field(new Image("red pawn.png"));
-        Field pawnRed3 = new Field(new Image("red pawn.png"));
-        Field pawnRed4 = new Field(new Image("red pawn.png"));
-
-
-        controller.addField(pawnBlue1);
-        controller.addField(pawnBlue2);
-        controller.addField(pawnBlue3);
-        controller.addField(pawnBlue4);
-
-        controller.addField(pawnRed1);
-        controller.addField(pawnRed2);
-        controller.addField(pawnRed3);
-        controller.addField(pawnRed4);
-
-        User marc = new User(0,0,0,0,"blue");
-        User carm = new User(0,0,0,0, "red");
+        Player marc = new Player(0,0,0,0,"blue");
+        Player carm = new Player(0,0,0,0, "red");
 
         Button startGameButton = new Button("Start game");
-    //    grid.add(startGameButton, 2, 5);
+
         grid.add(startGameButton, 0, 0, 1, 1);
 
 
@@ -367,14 +300,15 @@ public class Ludo extends Application{
 
 
 
-        Scene scene = new Scene(grid, 1600, 950, Color.BLACK);
+        Scene scene = new Scene(grid, 1600, 800, Color.BLACK);
 
         primaryStage.setTitle("LUDO GAME");
         primaryStage.setScene(scene);
-    //    controller.setPawns(marc,carm);
+
         primaryStage.show();
 
 
     }
+
 }
 
