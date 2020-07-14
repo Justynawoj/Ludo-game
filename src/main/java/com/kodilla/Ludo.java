@@ -340,26 +340,26 @@ public class Ludo extends Application{
         field133.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
         field134.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
 
-//        Field pawnBlue1 = new Field(new Image("blue pawn.png"));
-//        Field pawnBlue2 = new Field(new Image("blue pawn.png"));
-//        Field pawnBlue3 = new Field(new Image("blue pawn.png"));
-//        Field pawnBlue4 = new Field(new Image("blue pawn.png"));
-//
-//        Field pawnRed1 = new Field(new Image("red pawn.png"));
-//        Field pawnRed2 = new Field(new Image("red pawn.png"));
-//        Field pawnRed3 = new Field(new Image("red pawn.png"));
-//        Field pawnRed4 = new Field(new Image("red pawn.png"));
-//
-//
-//        controller.addField(pawnBlue1);
-//        controller.addField(pawnBlue2);
-//        controller.addField(pawnBlue3);
-//        controller.addField(pawnBlue4);
-//
-//        controller.addField(pawnRed1);
-//        controller.addField(pawnRed2);
-//        controller.addField(pawnRed3);
-//        controller.addField(pawnRed4);
+        Field pawnBlue1 = new Field(new Image("blue pawn.png"));
+        Field pawnBlue2 = new Field(new Image("blue pawn.png"));
+        Field pawnBlue3 = new Field(new Image("blue pawn.png"));
+        Field pawnBlue4 = new Field(new Image("blue pawn.png"));
+
+        Field pawnRed1 = new Field(new Image("red pawn.png"));
+        Field pawnRed2 = new Field(new Image("red pawn.png"));
+        Field pawnRed3 = new Field(new Image("red pawn.png"));
+        Field pawnRed4 = new Field(new Image("red pawn.png"));
+
+
+        controller.addField(pawnBlue1);
+        controller.addField(pawnBlue2);
+        controller.addField(pawnBlue3);
+        controller.addField(pawnBlue4);
+
+        controller.addField(pawnRed1);
+        controller.addField(pawnRed2);
+        controller.addField(pawnRed3);
+        controller.addField(pawnRed4);
 
         Player marc = new Player(0,0,0,0,"blue");
         Player carm = new Player(0,0,0,0, "red");
