@@ -8,10 +8,10 @@ import javafx.scene.control.Label;
 
 public class Player extends ActionEvent {
 
-    int p1;
-    int p2;
-    int p3;
-    int p4;
+    int p1 = 0;
+    int p2 = 0;
+    int p3 = 0;
+    int p4 = 0;
 
     int newAvailablePosition1;
     int newAvailablePosition2;
@@ -37,33 +37,78 @@ public class Player extends ActionEvent {
 
     }
 
-    public void setPositions() {
-        if (color.equalsIgnoreCase("blue")) {
-            startingPosition = 1;
-            endingPosition = 40;
-            startingWinningPosition = 91;
-            endingWinningPosition = 94;
-        }
-        if (color.equalsIgnoreCase("red")) {
-            startingPosition = 11;
-            endingPosition = 10;
-            startingWinningPosition = 61;
-            endingWinningPosition = 64;
-        }
-        if (color.equalsIgnoreCase("yellow")) {
-            startingPosition = 21;
-            endingPosition = 20;
-            startingWinningPosition = 71;
-            endingWinningPosition = 74;
-        }
-        if (color.equalsIgnoreCase("green")) {
-            startingPosition = 31;
-            endingPosition = 30;
-            startingWinningPosition = 81;
-            endingWinningPosition = 84;
-        }
-    }
+//    public void setPositions() {
+//        if (color.equalsIgnoreCase("blue")) {
+//            startingPosition = 1;
+//            endingPosition = 40;
+//            startingWinningPosition = 91;
+//            endingWinningPosition = 94;
+//        }
+//        if (color.equalsIgnoreCase("red")) {
+//            startingPosition = 11;
+//            endingPosition = 10;
+//            startingWinningPosition = 61;
+//            endingWinningPosition = 64;
+//        }
+//        if (color.equalsIgnoreCase("yellow")) {
+//            startingPosition = 21;
+//            endingPosition = 20;
+//            startingWinningPosition = 71;
+//            endingWinningPosition = 74;
+//        }
+//        if (color.equalsIgnoreCase("green")) {
+//            startingPosition = 31;
+//            endingPosition = 30;
+//            startingWinningPosition = 81;
+//            endingWinningPosition = 84;
+//        }
+//    }
+public void setPositions() {
+    if (color.equalsIgnoreCase("blue")) {
+        startingPosition = 1;
+        endingPosition = 40;
+        startingWinningPosition = 91;
+        endingWinningPosition = 94;
 
+        p1 = 101;
+        p2 = 102;
+        p3 = 103;
+        p4 = 104;
+    }
+    if (color.equalsIgnoreCase("red")) {
+        startingPosition = 11;
+        endingPosition = 10;
+        startingWinningPosition = 61;
+        endingWinningPosition = 64;
+
+        p1 = 111;
+        p2 = 112;
+        p3 = 113;
+        p4 = 114;
+    }
+    if (color.equalsIgnoreCase("yellow")) {
+        startingPosition = 21;
+        endingPosition = 20;
+        startingWinningPosition = 71;
+        endingWinningPosition = 74;
+
+        p1 = 121;
+        p2 = 122;
+        p3 = 123;
+        p4 = 124;
+    }
+    if (color.equalsIgnoreCase("green")) {
+        startingPosition = 31;
+        endingPosition = 30;
+        startingWinningPosition = 81;
+        endingWinningPosition = 84;
+
+        p1 = 131;
+        p2 = 132;
+        p3 = 133;
+        p4 = 134;
+    }
+}
     static int trowDice() {
         Random kostka = new Random();
         return kostka.nextInt(6) + 1;
@@ -75,7 +120,7 @@ public class Player extends ActionEvent {
         player2.setPositions();
 
         while (!player1.hasWon() && (!player2.hasWon())) {
-        //    player1.setBluePawns(player1,player2);
+            player1.setBluePawns(player1,player2);
         //    Controller.getController().setPawns(player1,player2);
 //			for (int i = 0; i < 100; i++) {
 
@@ -130,21 +175,21 @@ public class Player extends ActionEvent {
 
         // if thrown 6 goes out of home
 
-        if ((p1 <= 0) && (rzut == 6)) {
+        if ((p1 >100) && (rzut == 6)) {
             newAvailablePosition1 = startingPosition;
         }
-        if ((p2 <= 0) && (rzut == 6)) {
+        if ((p2 >100) && (rzut == 6)) {
             newAvailablePosition2 = startingPosition;
         }
-        if ((p3 <= 0) && (rzut == 6)) {
+        if ((p3 >100) && (rzut == 6)) {
             newAvailablePosition3 = startingPosition;
         }
-        if ((p4 <= 0) && (rzut == 6)) {
+        if ((p4 >100) && (rzut == 6)) {
             newAvailablePosition4 = startingPosition;
         }
 
         if (!this.color.equalsIgnoreCase("blue")) {
-            if (p1 > 0) {
+            if (p1 <100) {
                 if (p1IsDifferent(rzut)) {
 
                     if ((p1 >= startingPosition) && (p1 + rzut <= 40)) {
@@ -171,7 +216,7 @@ public class Player extends ActionEvent {
 
             }
 
-            if (p2 > 0) {
+            if (p2 <100) {
                 if (p2IsDifferent(rzut)) {
 
                     if ((p2 >= startingPosition) && (p2 + rzut <= 40)) {
@@ -198,7 +243,7 @@ public class Player extends ActionEvent {
                 }
 
             }
-            if (p3 > 0) {
+            if (p3 <100) {
                 if (p3IsDifferent(rzut)) {
 
                     if ((p3 >= startingPosition) && (p3 + rzut <= 40)) {
@@ -225,7 +270,7 @@ public class Player extends ActionEvent {
 
             }
 
-            if (p4 > 0) {
+            if (p4 <100) {
                 if (p4IsDifferent(rzut)) {
 
                     if ((p4 >= startingPosition) && (p4 + rzut <= 40)) {
@@ -255,7 +300,7 @@ public class Player extends ActionEvent {
         }
 
         if (this.color.equalsIgnoreCase("blue")) {
-            if (this.p1IsDifferent(rzut) && p1 > 0) {
+            if (this.p1IsDifferent(rzut) && p1 <100) {
                 if (p1 + rzut < endingPosition) {
                     newAvailablePosition1 = p1 + rzut;
                 } else if ((p1 + rzut > endingPosition) && (p1 + rzut + 50 < endingWinningPosition) && (p1 < 41)) {
@@ -265,7 +310,7 @@ public class Player extends ActionEvent {
                 }
             }
 
-            if (this.p2IsDifferent(rzut) && p2 > 0) {
+            if (this.p2IsDifferent(rzut) && p2 <100) {
                 if (p2 + rzut < endingPosition) {
                     newAvailablePosition2 = p2 + rzut;
                 } else if ((p2 + rzut > endingPosition) && (p2 + rzut + 50 < endingWinningPosition) && (p2 < 41)) {
@@ -274,7 +319,7 @@ public class Player extends ActionEvent {
                     newAvailablePosition2 = p2 + rzut;
                 }
             }
-            if (this.p3IsDifferent(rzut) && p3 > 0) {
+            if (this.p3IsDifferent(rzut) && p3 <100) {
                 if (p3 + rzut < endingPosition) {
                     newAvailablePosition3 = p3 + rzut;
                 } else if ((p3 + rzut > endingPosition) && (p3 + rzut + 50 < endingWinningPosition) && (p3 < 41)) {
@@ -283,7 +328,7 @@ public class Player extends ActionEvent {
                     newAvailablePosition3 = p3 + rzut;
                 }
             }
-            if (this.p4IsDifferent(rzut) && p4 > 0) {
+            if (this.p4IsDifferent(rzut) && p4 <100) {
                 if (p4 + rzut < endingPosition) {
                     newAvailablePosition4 = p4 + rzut;
                 } else if ((p4 + rzut > endingPosition) && (p4 + rzut + 50 < endingWinningPosition) && (p4 < 41)) {

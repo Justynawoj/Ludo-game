@@ -39,10 +39,10 @@ public class Controller {
 
     public void setPawns(Player player1, Player player2) {
         int number = player1.p1;
-//        int pawn1 = player1.p1;
-//        int pawn2 = player1.p2;
-//        int pawn3 = player1.p3;
-//        int pawn4 = player1.p4;
+        int pawn1 = player1.p1;
+        int pawn2 = player1.p2;
+        int pawn3 = player1.p3;
+        int pawn4 = player1.p4;
 //
 //        for (int i = 0; i<fieldsInArray.size();i++){
 //            if( i!= pawn1 && i!= pawn2 && i!= pawn3 && i!= pawn4){
@@ -59,15 +59,17 @@ public class Controller {
 //        fieldsInArray.get(pawn4).setFill(new ImagePattern(new Image("blue pawn.png",70,70,false,false)));
 //
 
-
+        for (int i = 0; i<fieldsInArray.size();i++){
+            System.out.println(fieldsInArray.get(i).position + " " +i);
+        }
 //        for (int i = 0; i<fieldsInArray.size();i++){
 //            if(fieldsInArray.get(i).getPosition() == number){
 //                fieldsInArray.get(i).setFill(new ImagePattern(new Image("blue pawn.png",70,70,false,false)));
 //
 //            }
 //
-        //}
-
+//        }
+//
     }
 
 }
