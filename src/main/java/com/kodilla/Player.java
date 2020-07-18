@@ -23,11 +23,10 @@ public class Player extends ActionEvent {
     int startingWinningPosition;
     int endingWinningPosition;
 
-    String color;
+    Color color;
     int thrownDice;
 
-
-    public Player(int p1, int p2, int p3, int p4, String color) {
+    public Player(int p1, int p2, int p3, int p4, Color color) {
 
         this.p1 = p1;
         this.p2 = p2;
@@ -35,10 +34,11 @@ public class Player extends ActionEvent {
         this.p4 = p4;
         this.color = color;
 
+        this.setPositions();
     }
 
     public void setPositions() {
-        if (color.equalsIgnoreCase("blue")) {
+        if (color == Color.BLUE) {
              startingPosition = 1;
              endingPosition = 40;
              startingWinningPosition = 91;
@@ -49,7 +49,7 @@ public class Player extends ActionEvent {
               p3 = 103;
               p4 = 104;
         }
-         if (color.equalsIgnoreCase("red")) {
+         if (color == Color.RED) {
              startingPosition = 11;
              endingPosition = 10;
              startingWinningPosition = 61;
@@ -60,7 +60,7 @@ public class Player extends ActionEvent {
               p3 = 113;
               p4 = 114;
          }
-         if (color.equalsIgnoreCase("yellow")) {
+         if (color == Color.YELLOW) {
              startingPosition = 21;
              endingPosition = 20;
              startingWinningPosition = 71;
@@ -71,7 +71,7 @@ public class Player extends ActionEvent {
              p3 = 123;
              p4 = 124;
           }
-         if (color.equalsIgnoreCase("green")) {
+         if (color == Color.GREEN) {
              startingPosition = 31;
              endingPosition = 30;
              startingWinningPosition = 81;
@@ -83,15 +83,9 @@ public class Player extends ActionEvent {
              p4 = 134;
          }
     }
-    static int trowDice() {
-        Random kostka = new Random();
-        return kostka.nextInt(6) + 1;
-    }
 
     public static void startGame(Player player1, Player player2, Label label) {
 
-        player1.setPositions();
-        player2.setPositions();
 
         while (!player1.hasWon() && (!player2.hasWon())) {
         //    player1.setBluePawns(player1,player2);
@@ -127,7 +121,7 @@ public class Player extends ActionEvent {
     // sprawdzenie czy wygral
 
     public void newMove(Player player1, Player player2) {
-        thrownDice = trowDice();
+        thrownDice = DiceService.getInstance().getDiceResult();
         System.out.println(thrownDice);
         resetNewPosition();
         calculateNewAvailablePositions(thrownDice);
@@ -162,7 +156,7 @@ public class Player extends ActionEvent {
             newAvailablePosition4 = startingPosition;
         }
 
-        if (!this.color.equalsIgnoreCase("blue")) {
+        if (this.color != Color.BLUE) {
             if (p1 <100) {
                 if (p1IsDifferent(rolledDiceNumber)) {
 
@@ -273,7 +267,7 @@ public class Player extends ActionEvent {
 
         }
 
-        if (this.color.equalsIgnoreCase("blue")) {
+        if (this.color != Color.BLUE) {
             if (this.p1IsDifferent(rolledDiceNumber) && p1 <100) {
                 if (p1 + rolledDiceNumber < endingPosition) {
                     newAvailablePosition1 = p1 + rolledDiceNumber;
@@ -529,4 +523,7 @@ public class Player extends ActionEvent {
                 && (p4 + rolledDiceNumber + 50 != p3);
     }
 
+    public Color getColor() {
+        return color;
+    }
 }

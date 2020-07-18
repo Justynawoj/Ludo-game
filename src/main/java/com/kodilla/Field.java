@@ -1,5 +1,7 @@
 package com.kodilla;
 
+import static com.kodilla.FillUtils.fill;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
@@ -11,6 +13,7 @@ public class Field extends Rectangle {
 
     private int col, row = 0;
     int position;
+    Player player;
 
     public Field(Image image) {
         super(70, 70, new ImagePattern(image));
@@ -21,8 +24,8 @@ public class Field extends Rectangle {
         });
     }
 
-    public Field(int col, int row, int  position) {
-        super(70, 70, new ImagePattern(new Image("circle.png",70,70,false,false)));
+    public Field(int col, int row, int position) {
+        super(70, 70, fill("circle.png"));
         this.col = col;
         this.row = row;
         this.position = position;
@@ -40,6 +43,16 @@ public class Field extends Rectangle {
 
     public int getPosition() {
         return position;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        Color playerColor = player.getColor();
+        this.setFill(fill(String.format("%s pawn.png", playerColor.name().toLowerCase())));
     }
 
     @Override

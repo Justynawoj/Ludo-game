@@ -14,7 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
-
+import static com.kodilla.Color.BLUE;
+import static com.kodilla.Color.RED;
 import static com.kodilla.Player.startGame;
 
 public class Ludo extends Application{
@@ -47,6 +48,8 @@ public class Ludo extends Application{
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.TOP_CENTER);
         grid.setPadding(new Insets(15, 15, 15, 15));
+        grid.setHgap(5);
+        grid.setVgap(5);
         grid.setBackground(background);
 
         Field field1 = new Field(6,0,1);
@@ -361,22 +364,22 @@ public class Ludo extends Application{
         controller.addField(pawnRed3);
         controller.addField(pawnRed4);
 
-        Player marc = new Player(0,0,0,0,"blue");
-        Player carm = new Player(0,0,0,0, "red");
+        Player player = new Player(0,0,0,0,BLUE);
+        field101.setPlayer(player);
+        field102.setPlayer(player);
+        field103.setPlayer(player);
+        field104.setPlayer(player);
 
-        Button startGameButton = new Button("Start game");
+        Player comp = new Player(0,0,0,0, RED);
+        field111.setPlayer(comp);
+        field112.setPlayer(comp);
+        field113.setPlayer(comp);
+        field114.setPlayer(comp);
 
-        grid.add(startGameButton, 0, 0, 1, 1);
-
+        Label diceLabel = new Label(String.format("Dice value is %s", DiceService.getInstance().getDiceResult()));
+        grid.add(diceLabel, 0, 0, 1, 1);
 
         grid.add(gameOverLabel,0,1,1,1);
-
-
-        startGameButton.setText("Nowa gra");
-        startGameButton.setOnAction((e) -> {
-            startGame(marc, carm, gameOverLabel);
-        });
-
 
 
         Scene scene = new Scene(grid, 1600, 800, Color.BLACK);
