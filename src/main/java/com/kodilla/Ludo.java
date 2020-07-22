@@ -16,12 +16,12 @@ import javafx.scene.layout.GridPane;
 
 import static com.kodilla.Color.BLUE;
 import static com.kodilla.Color.RED;
-import static com.kodilla.Player.startGame;
+//import static com.kodilla.Player.startGame;
 
 public class Ludo extends Application{
 
     private Image imageback = new Image("background1.png");
-    private Image circle = new Image("circle.png",70,70,false,false);
+    private Image circle = new Image("circle.png",65,65,false,false);
     private Image blue = new Image("blue.png",70,70,false,false);
     private Image red = new Image("red.png",70,70,false,false);
     private Image yellow = new Image("yellow.png",70,70,false,false);
@@ -185,10 +185,10 @@ public class Ludo extends Application{
         Field field94 = new Field(5,4,94);
 
 
-        field91.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field92.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field93.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field94.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field91.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field92.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field93.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field94.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
 
         grid.add(field91,5,1);
         grid.add(field92,5,2);
@@ -211,10 +211,10 @@ public class Ludo extends Application{
         grid.add(field63,7,5);
         grid.add(field64,6,5);
 
-        field61.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field62.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field63.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field64.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
+        field61.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field62.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field63.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field64.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
 
         controller.addField(field61);
         controller.addField(field62);
@@ -237,10 +237,10 @@ public class Ludo extends Application{
         controller.addField(field73);
         controller.addField(field74);
 
-        field71.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field72.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field73.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field74.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
+        field71.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field72.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field73.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field74.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
 
 
         Field field81 = new Field(1,5,81);
@@ -258,10 +258,10 @@ public class Ludo extends Application{
         controller.addField(field83);
         controller.addField(field84);
 
-        field81.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field82.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field83.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field84.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
+        field81.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field82.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field83.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field84.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
 
         Field field101 = new Field(2,1,101);
         Field field102 = new Field(2,2,102);
@@ -278,35 +278,35 @@ public class Ludo extends Application{
         grid.add(field103,1,2);
         grid.add(field104,1,1);
 
-        field101.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field102.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field103.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
-        field104.setFill(new ImagePattern(new Image("blue.png",70,70,false,false)));
+        field101.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field102.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field103.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
+        field104.setFill(new ImagePattern(new Image("blue.png",65,65,false,false)));
 
-        Field field111 = new Field(9,1,111);
-        Field field112 = new Field(9,2,112);
-        Field field113 = new Field(8,2,113);
-        Field field114 = new Field(8,1,114);
+        Field field115 = new Field(9,1,115);
+        Field field116 = new Field(9,2,116);
+        Field field117 = new Field(8,2,117);
+        Field field118 = new Field(8,1,118);
 
-        controller.addField(field111);
-        controller.addField(field112);
-        controller.addField(field113);
-        controller.addField(field114);
+        controller.addField(field115);
+        controller.addField(field116);
+        controller.addField(field117);
+        controller.addField(field118);
 
-        grid.add(field111,9,1);
-        grid.add(field112,9,2);
-        grid.add(field113,8,2);
-        grid.add(field114,8,1);
+        grid.add(field115,9,1);
+        grid.add(field116,9,2);
+        grid.add(field117,8,2);
+        grid.add(field118,8,1);
 
-        field111.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field112.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field113.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
-        field114.setFill(new ImagePattern(new Image("red.png",70,70,false,false)));
+        field115.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field116.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field117.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
+        field118.setFill(new ImagePattern(new Image("red.png",65,65,false,false)));
 
-        Field field121 = new Field(9,8,121);
-        Field field122 = new Field(9,9,122);
-        Field field123 = new Field(8,9,123);
-        Field field124 = new Field(8,8,124);
+        Field field121 = new Field(9,8,125);
+        Field field122 = new Field(9,9,126);
+        Field field123 = new Field(8,9,127);
+        Field field124 = new Field(8,8,128);
 
         controller.addField(field121);
         controller.addField(field122);
@@ -318,15 +318,15 @@ public class Ludo extends Application{
         grid.add(field123,8,9);
         grid.add(field124,8,8);
 
-        field121.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field122.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field123.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
-        field124.setFill(new ImagePattern(new Image("yellow.png",70,70,false,false)));
+        field121.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field122.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field123.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
+        field124.setFill(new ImagePattern(new Image("yellow.png",65,65,false,false)));
 
-        Field field131 = new Field(2,8,131);
-        Field field132 = new Field(2,9,132);
-        Field field133 = new Field(1,9,133);
-        Field field134 = new Field(1,8,134);
+        Field field131 = new Field(2,8,135);
+        Field field132 = new Field(2,9,136);
+        Field field133 = new Field(1,9,137);
+        Field field134 = new Field(1,8,138);
 
         controller.addField(field131);
         controller.addField(field132);
@@ -338,10 +338,10 @@ public class Ludo extends Application{
         grid.add(field133,1,9);
         grid.add(field134,1,8);
 
-        field131.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field132.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field133.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
-        field134.setFill(new ImagePattern(new Image("green.png",70,70,false,false)));
+        field131.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field132.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field133.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
+        field134.setFill(new ImagePattern(new Image("green.png",65,65,false,false)));
 
         Field pawnBlue1 = new Field(new Image("blue pawn.png"));
         Field pawnBlue2 = new Field(new Image("blue pawn.png"));
@@ -364,23 +364,49 @@ public class Ludo extends Application{
         controller.addField(pawnRed3);
         controller.addField(pawnRed4);
 
-        Player player = new Player(0,0,0,0,BLUE);
+        Player player = new Player(0,0,0,0,BLUE );
         field101.setPlayer(player);
         field102.setPlayer(player);
         field103.setPlayer(player);
         field104.setPlayer(player);
 
         Player comp = new Player(0,0,0,0, RED);
-        field111.setPlayer(comp);
-        field112.setPlayer(comp);
-        field113.setPlayer(comp);
-        field114.setPlayer(comp);
+        field115.setPlayer(comp);
+        field116.setPlayer(comp);
+        field117.setPlayer(comp);
+        field118.setPlayer(comp);
 
+   /*     Player player = new Player(BLUE,new Pawn(0,0,0,0));
+        field101.setPlayer(player);
+        field102.setPlayer(player);
+        field103.setPlayer(player);
+        field104.setPlayer(player);
+
+        Player comp = new Player(RED,new Pawn(0,0,0,0));
+        field115.setPlayer(comp);
+        field116.setPlayer(comp);
+        field117.setPlayer(comp);
+        field118.setPlayer(comp);
+*/
         Label diceLabel = new Label(String.format("Dice value is %s", DiceService.getInstance().getDiceResult()));
-        grid.add(diceLabel, 0, 0, 1, 1);
+        grid.add(diceLabel, 12, 0, 1, 1);
 
-        grid.add(gameOverLabel,0,1,1,1);
 
+
+        Button throwDiceButton = new Button("Throw dice");
+        grid.add(throwDiceButton,12,1,1,1);
+
+
+        throwDiceButton.setOnAction(event -> {
+            DiceService.getInstance().trowDice();
+            System.out.println(DiceService.getInstance().getDiceResult());
+
+            Label diceLabel2 = new Label(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
+            Field field200 = new Field(16,0,200);
+            grid.add(field200,16,0);
+            field200.setFill(new ImagePattern(new Image("yellow.png",60,65,false,false)));
+            grid.add(diceLabel2, 16, 0, 1, 1);
+        });
 
         Scene scene = new Scene(grid, 1600, 800, Color.BLACK);
 

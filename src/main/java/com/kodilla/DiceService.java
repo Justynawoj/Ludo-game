@@ -18,6 +18,7 @@ public class DiceService {
 
     void trowDice() {
         diceResult = RANDOM.nextInt(6) + 1;
+       // diceResult = 6;
     }
 
     public int getDiceResult() {

@@ -13,6 +13,7 @@ public class Controller {
 
     private ArrayList<Field> fieldsInArray = new ArrayList<>();
 
+
     private Controller() {
     }
 
@@ -26,27 +27,86 @@ public class Controller {
     }
 
     public void clicked(Field field) {
-        System.out.println(String.format("Element clicked col %s, row %s", field.getRow(), field.getCol()));
-        System.out.println("you clicked" + field.getPosition());
+        try {
 
 
-        /*
-         * playerMove
-         */
-        int diceValue = DiceService.getInstance().getDiceResult();
-        System.out.println(String.format("Player dice value is %s", diceValue));
-        int currentPosition = field.getPosition() % 100;
-        int newPosition = currentPosition + diceValue;
-        Field fieldToTake = fieldsInArray.stream()
-                .filter(f -> f.getPosition() == newPosition)
-                .findFirst()
-                .get();
-        fieldToTake.setPlayer(field.getPlayer());
-        field.setFill(fill("circle.png"));
+            System.out.println(String.format("Element clicked col %s, row %s", field.getRow(), field.getCol()));
+            System.out.println("you clicked" + field.getPosition());
 
-        /*
-         * computerMove?
-         */
+
+            int fieldClicked = field.getPosition();
+            System.out.println("field clicked " + fieldClicked);
+            int diceValue = DiceService.getInstance().getDiceResult();
+            field.getPlayer().resetNewPosition();
+            field.getPlayer().calculateNewAvailablePositions(diceValue);
+            int newPosition = field.getPlayer().choosePawnToMove(fieldClicked);
+            System.out.println("new position " + newPosition + field.getPlayer().color);
+
+            //     System.out.println(String.format("Player dice value is %s", diceValue));
+            //   int currentPosition = field.getPosition() % 100;
+            //   int currentPosition = field.getPlayer().newAvailablePosition1;
+            //   int newPosition = currentPosition + diceValue;
+
+            Field fieldToTake = fieldsInArray.stream()
+                    .filter(f -> f.getPosition() == newPosition)
+                    .findFirst()
+                    .get();
+
+            if(fieldToTake.getPlayer() != null && fieldToTake.getPlayer() != field.getPlayer()) {
+                field.getPlayer().changeOpponentsPosition(field.getPlayer(), fieldToTake.getPlayer());
+            }
+            fieldToTake.setPlayer(field.getPlayer());
+
+            if(fieldToTake != field) {
+                field.setFill(fill("circle.png"));
+                if (fieldToTake.position == fieldToTake.getPlayer().p1){
+                    Player player = fieldToTake.getPlayer();
+                    int fieldNUmber = player.p1HomePosition;
+                    Field fieldToSetPlayer = fieldsInArray.stream()
+                            .filter(f -> f.getPosition() == fieldNUmber)
+                            .findFirst()
+                            .get();
+                    fieldToSetPlayer.player = fieldToTake.getPlayer();
+                }
+                if (fieldToTake.position == fieldToTake.getPlayer().p2){
+                    Player player = fieldToTake.getPlayer();
+                    int fieldNUmber = player.p2HomePosition;
+                    Field fieldToSetPlayer = fieldsInArray.stream()
+                            .filter(f -> f.getPosition() == fieldNUmber)
+                            .findFirst()
+                            .get();
+                    fieldToSetPlayer.player = fieldToTake.getPlayer();
+                }
+                if (fieldToTake.position == fieldToTake.getPlayer().p3){
+                    Player player = fieldToTake.getPlayer();
+                    int fieldNUmber = player.p3HomePosition;
+                    Field fieldToSetPlayer = fieldsInArray.stream()
+                            .filter(f -> f.getPosition() == fieldNUmber)
+                            .findFirst()
+                            .get();
+                    fieldToSetPlayer.player = fieldToTake.getPlayer();
+                }
+                if (fieldToTake.position == fieldToTake.getPlayer().p4){
+                    Player player = fieldToTake.getPlayer();
+                    int fieldNUmber = player.p4HomePosition;
+                    Field fieldToSetPlayer = fieldsInArray.stream()
+                            .filter(f -> f.getPosition() == fieldNUmber)
+                            .findFirst()
+                            .get();
+                    fieldToSetPlayer.player = fieldToTake.getPlayer();
+                }
+                field.removePlayerFromField();
+
+            }
+
+
+            /*
+             * computerMove?
+             */
+        }
+        catch (Exception e){
+            System.out.println("No such move. Try again, choose correct pawn");
+        }
 
     }
 

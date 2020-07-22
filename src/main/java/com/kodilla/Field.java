@@ -16,16 +16,16 @@ public class Field extends Rectangle {
     Player player;
 
     public Field(Image image) {
-        super(70, 70, new ImagePattern(image));
+        super(65, 65, new ImagePattern(image));
 
         setOnMouseClicked(mouseEvent -> {
             System.out.println(String.format("Element clicked col %s, row %s", -1, -1));
-            setFill(new ImagePattern(new Image("black.png",70,70,false,false)));
+            setFill(new ImagePattern(new Image("black.png",65,65,false,false)));
         });
     }
 
     public Field(int col, int row, int position) {
-        super(70, 70, fill("circle.png"));
+        super(65, 65, fill("circle.png"));
         this.col = col;
         this.row = row;
         this.position = position;
@@ -60,5 +60,9 @@ public class Field extends Rectangle {
         return "Field{" +
                 "position=" + position +
                 '}';
+    }
+
+    public void removePlayerFromField(){
+        this.player = null;
     }
 }
