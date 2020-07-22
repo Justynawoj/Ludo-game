@@ -13,7 +13,7 @@ public class Field extends Rectangle {
 
     private int col, row = 0;
     int position;
-    Player player;
+    Pawn pawn;
 
     public Field(Image image) {
         super(65, 65, new ImagePattern(image));
@@ -33,6 +33,10 @@ public class Field extends Rectangle {
         setOnMouseClicked(mouseEvent -> Controller.getController().clicked(this));
     }
 
+    public Pawn getPawn() {
+        return pawn;
+    }
+
     public int getCol() {
         return col;
     }
@@ -45,14 +49,15 @@ public class Field extends Rectangle {
         return position;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-        Color playerColor = player.getColor();
-        this.setFill(fill(String.format("%s pawn.png", playerColor.name().toLowerCase())));
+    public void setPawn(Pawn pawn) {
+        if(pawn == null){
+            this.setFill(fill(String.format("circle.png")));
+        }else {
+            this.pawn = pawn;
+            Color playerColor = pawn.getPlayer().getColor();
+            this.setFill(fill(String.format("%s pawn.png", playerColor.name().toLowerCase())));
+        }
     }
 
     @Override
@@ -60,9 +65,5 @@ public class Field extends Rectangle {
         return "Field{" +
                 "position=" + position +
                 '}';
-    }
-
-    public void removePlayerFromField(){
-        this.player = null;
     }
 }

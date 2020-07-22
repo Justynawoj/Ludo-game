@@ -1,15 +1,26 @@
 package com.kodilla;
 
 public class Pawn {
-    int position1;
-    int position2;
-    int position3;
-    int position4;
 
-    public Pawn(int position1, int position2, int position3, int position4) {
-        this.position1 = position1;
-        this.position2 = position2;
-        this.position3 = position3;
-        this.position4 = position4;
+    private Player player;
+    private Field field;
+
+    public Pawn(Player player, Field field) {
+        this.player = player;
+        this.field = field;
+
     }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }

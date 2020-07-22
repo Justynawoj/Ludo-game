@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import static com.kodilla.Color.BLUE;
-import static com.kodilla.Color.RED;
 //import static com.kodilla.Player.startGame;
 
 public class Ludo extends Application{
@@ -364,17 +363,12 @@ public class Ludo extends Application{
         controller.addField(pawnRed3);
         controller.addField(pawnRed4);
 
-        Player player = new Player(0,0,0,0,BLUE );
-        field101.setPlayer(player);
-        field102.setPlayer(player);
-        field103.setPlayer(player);
-        field104.setPlayer(player);
-
-        Player comp = new Player(0,0,0,0, RED);
-        field115.setPlayer(comp);
-        field116.setPlayer(comp);
-        field117.setPlayer(comp);
-        field118.setPlayer(comp);
+        Player player = new Player(
+                field101,
+                field102,
+                field103,
+                field104,
+                BLUE);
 
    /*     Player player = new Player(BLUE,new Pawn(0,0,0,0));
         field101.setPlayer(player);
