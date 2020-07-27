@@ -1,15 +1,20 @@
 package com.kodilla;
 
-import java.util.Random;
-
 import javafx.event.ActionEvent;
 
 public class Player extends ActionEvent {
 
+    PositionsHolder positionsHolder;
     Pawn p1;
     Pawn p2;
     Pawn p3;
     Pawn p4;
+
+    boolean isComputer;
+
+    public PositionsHolder getPositionsHolder() {
+        return positionsHolder;
+    }
 
     int newAvailablePosition1;
     int newAvailablePosition2;
@@ -49,8 +54,9 @@ public class Player extends ActionEvent {
 
 
 
-    public Player(Field field1, Field field2, Field field3, Field field4, Color color) {
+    public Player(Field field1, Field field2, Field field3, Field field4, boolean isComputer, Color color) {
 
+        this.positionsHolder = new PositionsHolder();
         this.color = color;
         this.p1 = new Pawn(this, field1);
         field1.setPawn(p1);
@@ -60,6 +66,8 @@ public class Player extends ActionEvent {
         field3.setPawn(p3);
         this.p4 = new Pawn(this, field4);
         field4.setPawn(p4);//104
+
+        this.isComputer = isComputer;
     }
 
 //    public void setPositions() {
