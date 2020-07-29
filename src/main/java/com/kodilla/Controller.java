@@ -29,7 +29,6 @@ public class Controller {
 
     public void clicked(Field field) {
         try {
-
             int diceValue = DiceService.getInstance().getDiceResult();
 
             Pawn clickedPawn = field.getPawn();
@@ -38,13 +37,15 @@ public class Controller {
 
 
             System.out.println(clickedPawn.getPlayer().getP1().getField().position +" "+ clickedPawn.getPlayer().getP1().getProgress()+ "  " + clickedPawn.getPlayer().getP2().getField().position +" "+ clickedPawn.getPlayer().getP2().getProgress()+ "  "+clickedPawn.getPlayer().getP3().getField().position + " "+ clickedPawn.getPlayer().getP3().getProgress()+ "  " + clickedPawn.getPlayer().getP4().getField().position +" "+ clickedPawn.getPlayer().getP4().getProgress());
-            /*
-             * computerMove?
-             */
+
         } catch (Exception e) {
             System.out.println("No such move. Try again, choose correct pawn " + e.getMessage());
         }
-
+        /*
+         * computerMove?
+         */
+        int compDiceResult = DiceService.getInstance().thowDice();
+        System.out.println("Computer has dice value "+compDiceResult);
     }
 
     private void checkIfHasWon(Player player) {

@@ -384,25 +384,10 @@ public class Ludo extends Application{
 
 
 
-        Label diceLabel = new Label(String.format("Dice value is %s", DiceService.getInstance().getDiceResult()));
-        grid.add(diceLabel, 12, 0, 1, 1);
+
+        DiceService.getInstance().addGrid(grid);
 
 
-
-        Button throwDiceButton = new Button("Throw dice");
-        grid.add(throwDiceButton,12,1,1,1);
-
-
-        throwDiceButton.setOnAction(event -> {
-            DiceService.getInstance().trowDice();
-            System.out.println(DiceService.getInstance().getDiceResult());
-
-            Label diceLabel2 = new Label(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
-            Field field200 = new Field(16,0,200);
-            grid.add(field200,16,0);
-            field200.setFill(new ImagePattern(new Image("yellow.png",60,65,false,false)));
-            grid.add(diceLabel2, 16, 0, 1, 1);
-        });
 
         Scene scene = new Scene(grid, 1600, 800, Color.BLACK);
 
