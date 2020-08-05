@@ -5,6 +5,10 @@ public class Pawn {
     private Player player;
     private Field field;
     private Progress progress;
+    public boolean pawn1CanMove = false;
+    public boolean pawn2canMove = false;
+    public boolean pawn3canMove = false;
+    public boolean pawn4canMove = false;
 
 
     @Override

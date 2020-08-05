@@ -3,6 +3,7 @@ package com.kodilla;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Controller {
 
@@ -13,6 +14,8 @@ public class Controller {
 
     boolean inProgressToSet;
     boolean endToSet;
+    boolean canMove = false;
+    boolean newTry = true;
 
 
     private Controller() {
@@ -27,34 +30,177 @@ public class Controller {
         this.fieldsInArray.add(field);
     }
 
+
+    public void calculateAvailabilityOfMoves(Player player, int dice) {
+        int newP1Position = calculatePosition(player.getP1(), dice);
+        Field newFieldP1 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == newP1Position)
+                .findFirst().get();
+        if (checkIfCanMove(player.getP1().getField(), newFieldP1, player.getP1())) {
+            player.getP1().pawn1CanMove = true;
+
+            System.out.println("Pawn 1 can move");
+        }
+        Field newFieldP2 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == newP1Position)
+                .findFirst().get();
+        if (checkIfCanMove(player.getP2().getField(), newFieldP2, player.getP2())) {
+            player.getP2().pawn2canMove = true;
+            System.out.println("Pawn 2 can move");
+        }
+        Field newFieldP3 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == newP1Position)
+                .findFirst().get();
+        if (checkIfCanMove(player.getP3().getField(), newFieldP3, player.getP3())) {
+            player.getP3().pawn3canMove = true;
+            System.out.println("Pawn 3 can move");
+        }
+        Field newFieldP4 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == newP1Position)
+                .findFirst().get();
+        if (checkIfCanMove(player.getP4().getField(), newFieldP4, player.getP4())) {
+            player.getP4().pawn4canMove = true;
+            System.out.println("Pawn 4 can move");
+        }
+    }
+    public boolean checkIfCanMove(Field oldField, Field newField, Pawn pawn) {
+        System.out.print(oldField +" -> "+ newField);
+        if (newField.getPawn() == null || newField.getPawn().getPlayer() != pawn.getPlayer()) {
+            System.out.println(" Moze");
+            return true;
+        } else
+            System.out.println(" Nie moze");
+            return false;
+
+    }
+
     public void clicked(Field field) {
+
+        int diceValue = DiceService.getInstance().getDiceResult();
+
+        Field playersField = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 1000)
+                .findFirst().get();
+        Player player = playersField.getPawn().getPlayer();
+        calculateAvailabilityOfMoves(player,diceValue);
+
         try {
-            int diceValue = DiceService.getInstance().getDiceResult();
+
 
             Pawn clickedPawn = field.getPawn();
-            move(clickedPawn, diceValue);
-            checkIfHasWon(clickedPawn.getPlayer());
+            System.out.println(player.getP1().pawn1CanMove + " "+player.getP2().pawn2canMove + " "+player.getP3().pawn3canMove + " "+player.getP4().pawn4canMove + " ");
+                //  if(clickedPawn.getPlayer().equals(player)) {
+                if (clickedPawn.equals(player.getP1()) && player.getP1().pawn1CanMove ||
+                        clickedPawn.equals(player.getP2()) && player.getP2().pawn2canMove ||
+                        clickedPawn.equals(player.getP3()) && player.getP3().pawn3canMove ||
+                        clickedPawn.equals(player.getP4()) && player.getP4().pawn4canMove) {
+
+                    //  play(clickedPawn, diceValue);
+                    //playing time
+                    Field oldField = clickedPawn.getField();
+
+                    int newFieldPosition = calculatePosition(clickedPawn, diceValue);
+
+                    Field newField = fieldsInArray.stream()
+                            .filter(f -> f.getPosition() == newFieldPosition)
+                            .findFirst().get();
+
+                    changeOpponentPosition(newField, clickedPawn);
+                    if (checkIfCanMove(oldField, newField, clickedPawn)) {
+                        move(oldField, newField, clickedPawn);
+                        resetPawnCanMove(clickedPawn,player);
+                    }
+
+                    System.out.println("THIS PAWN CANNOT MOVE");
+
+                    // end of playing time
+
+                    checkIfHasWon(clickedPawn.getPlayer());
 
 
-            System.out.println(clickedPawn.getPlayer().getP1().getField().position +" "+ clickedPawn.getPlayer().getP1().getProgress()+ "  " + clickedPawn.getPlayer().getP2().getField().position +" "+ clickedPawn.getPlayer().getP2().getProgress()+ "  "+clickedPawn.getPlayer().getP3().getField().position + " "+ clickedPawn.getPlayer().getP3().getProgress()+ "  " + clickedPawn.getPlayer().getP4().getField().position +" "+ clickedPawn.getPlayer().getP4().getProgress());
+                    //    System.out.println(clickedPawn.getPlayer().getP1().getField().position + " " + clickedPawn.getPlayer().getP1().getProgress() + "  " + clickedPawn.getPlayer().getP2().getField().position + " " + clickedPawn.getPlayer().getP2().getProgress() + "  " + clickedPawn.getPlayer().getP3().getField().position + " " + clickedPawn.getPlayer().getP3().getProgress() + "  " + clickedPawn.getPlayer().getP4().getField().position + " " + clickedPawn.getPlayer().getP4().getProgress());
+
+
+                    /*
+                     * computerMove?
+                     */
+                    int compDiceResult = DiceService.getInstance().thowDice();
+                   // System.out.println("Computer has dice value " + compDiceResult);
+
+                    // move(computer.p1,compDiceResult);
+                    computerMove();
+                } else {
+                    System.out.println("CHOOOSE RIGHT YOUR OWN PAWN");
+                }
+
 
         } catch (Exception e) {
             System.out.println("No such move. Try again, choose correct pawn " + e.getMessage());
         }
-        /*
-         * computerMove?
-         */
-        int compDiceResult = DiceService.getInstance().thowDice();
-        System.out.println("Computer has dice value "+compDiceResult);
     }
 
-    private void checkIfHasWon(Player player) {
-        if ((player.getP1().getProgress() == Progress.END) &&(player.getP2().getProgress() == Progress.END) &&(player.getP3().getProgress() == Progress.END) &&(player.getP4().getProgress() == Progress.END)){
-            System.out.println("Player "+ player.getColor()+" has won!");
+    public void resetPawnCanMove(Pawn pawn, Player player){
+        if (pawn == player.getP1()){
+            pawn.pawn1CanMove = false;
+        }
+        if (pawn == player.getP2()){
+            pawn.pawn2canMove = false;
+        }
+        if (pawn == player.getP3()){
+            pawn.pawn3canMove = false;
+        }
+        if (pawn == player.getP4()){
+            pawn.pawn4canMove = false;
+        }
+    }
+    public void computerMove() {
+
+        Field computerField = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 3000)
+                .findFirst().get();
+        Player computer = computerField.getPawn().getPlayer();
+        int compDiceResult = DiceService.getInstance().thowDice();
+        Random randomGenerator = new Random();
+        int randomNumber = randomGenerator.nextInt(4) + 1;
+
+
+        if (compDiceResult == 6) {
+            if (computer.getP1().getProgress() == Progress.START) {
+                play(computer.p1, compDiceResult);
+            } else if (computer.getP2().getProgress() == Progress.START) {
+                play(computer.p2, compDiceResult);
+            } else if (computer.getP3().getProgress() == Progress.START) {
+                play(computer.p3, compDiceResult);
+            } else if (computer.getP4().getProgress() == Progress.START) {
+                play(computer.p4, compDiceResult);
+            }
+
+        } else {
+
+
+            if (randomNumber == 1) {
+                play(computer.p1, compDiceResult);
+            }
+            if (randomNumber == 2) {
+                play(computer.p2, compDiceResult);
+            }
+            if (randomNumber == 3) {
+                play(computer.p3, compDiceResult);
+            }
+            if (randomNumber == 4) {
+                play(computer.p4, compDiceResult);
+            }
         }
     }
 
-    private void move(Pawn pawn, int diceValue) {
+
+    private void checkIfHasWon(Player player) {
+        if ((player.getP1().getProgress() == Progress.END) && (player.getP2().getProgress() == Progress.END) && (player.getP3().getProgress() == Progress.END) && (player.getP4().getProgress() == Progress.END)) {
+            System.out.println("Player " + player.getColor() + " has won!");
+        }
+    }
+
+    private void play(Pawn pawn, int diceValue) {
 
         Field oldField = pawn.getField();
 
@@ -64,8 +210,10 @@ public class Controller {
                 .filter(field -> field.getPosition() == newFieldPosition)
                 .findFirst().get();
 
-        changeOpponentPosition( newField, pawn);
-        checkIfCanMove(oldField, newField, pawn);
+        changeOpponentPosition(newField, pawn);
+        if (checkIfCanMove(oldField, newField, pawn)) {
+            move(oldField, newField, pawn);
+        }
     }
 
     public void changeOpponentPosition(Field newField, Pawn pawn) {
@@ -115,30 +263,34 @@ public class Controller {
     }
 
 
-    public void checkIfCanMove(Field oldField, Field newField, Pawn pawn) {
-        if (newField.getPawn() == null || newField.getPawn().getPlayer() != pawn.getPlayer()) {
-            newField.setPawn(pawn);
-            oldField.setPawn(null);
-            pawn.setField(newField);
-            if (inProgressToSet) {
-                pawn.setProgress(Progress.IN_PROGRESS);
 
-            }
-            if (endToSet) {
-                pawn.setProgress(Progress.END);
 
-            }
+    public void move(Field oldField, Field newField, Pawn pawn) {
+        newField.setPawn(pawn);
+        oldField.setPawn(null);
+        pawn.setField(newField);
+
+        if (inProgressToSet) {
+            pawn.setProgress(Progress.IN_PROGRESS);
 
         }
+        if (endToSet) {
+            pawn.setProgress(Progress.END);
+
+        }
+
         inProgressToSet = false;
         endToSet = false;
+
     }
 
 
     private int calculatePosition(Pawn pawn, int diceValue) {
+
         Progress actualProgress = pawn.getProgress();
         int actualPosition = pawn.getField().getPosition();
         int newPosition = actualPosition;
+
         PositionsHolder holder = pawn.getPlayer().getPositionsHolder();
         Color playersColor = pawn.getPlayer().getColor();
 
@@ -146,6 +298,7 @@ public class Controller {
             case START:
                 if (diceValue == 6) {
                     newPosition = holder.getFirstCircle(playersColor);
+
                     inProgressToSet = true;
                 }
                 break;
@@ -155,15 +308,17 @@ public class Controller {
                     if (actualPosition >= holder.getFirstCircle(playersColor)) {
                         if (actualPosition + diceValue == 40) {
                             newPosition = (actualPosition + diceValue);
+
                         } else {
                             newPosition = (actualPosition + diceValue) % 40;
+
                         }
                     }
                     if (actualPosition < holder.getFirstCircle(playersColor)) {
                         if (actualPosition + diceValue <= holder.getLastCircle(playersColor)) {
                             newPosition = actualPosition + diceValue;
-                        }
-                        else if (actualPosition + diceValue + 50 <= holder.getLastWinningPosition(playersColor)) {
+
+                        } else if (actualPosition + diceValue + 50 <= holder.getLastWinningPosition(playersColor)) {
                             newPosition = actualPosition + diceValue + 50;
                             endToSet = true;
 
@@ -172,13 +327,16 @@ public class Controller {
                 }
                 if (playersColor == Color.BLUE) {
                     int lastCircle = holder.getLastCircle(playersColor);
-                    System.out.println(lastCircle);
+
 
                     if (actualPosition + diceValue <= lastCircle) {
                         newPosition = actualPosition + diceValue;
+
+
                     } else if (actualPosition + diceValue > lastCircle) {
                         if (actualPosition + diceValue + 50 <= holder.getLastWinningPosition(playersColor)) {
                             newPosition = actualPosition + diceValue + 50;
+
                             endToSet = true;
                         }
                     }
@@ -187,9 +345,11 @@ public class Controller {
             case END:
                 if (actualPosition + diceValue <= holder.getLastWinningPosition(playersColor)) {
                     newPosition = actualPosition + diceValue;
+
                 }
         }
         return newPosition;
+
     }
 }
 

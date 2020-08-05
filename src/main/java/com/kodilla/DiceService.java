@@ -37,7 +37,8 @@ public class DiceService {
         diceResult = RANDOM.nextInt(6) + 1;
         System.out.println("Dice result " + diceResult);
 
-        Label diceLabel2 = new Label(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
+        Label diceLabel2 = new Label();
+        diceLabel2.setText(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
         Field field200 = new Field(16, 0, 200);
         this.grid.add(field200, 16, 0);
         field200.setFill(fill("yellow.png"));

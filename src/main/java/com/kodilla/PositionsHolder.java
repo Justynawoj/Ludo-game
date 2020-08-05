@@ -2,10 +2,6 @@ package com.kodilla;
 
 public class PositionsHolder {
 
-    Pawn pawn;
-    Color color;
-    Progress progress;
-
 
 
     int getHomePositions(Color color){
