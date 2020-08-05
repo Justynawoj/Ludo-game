@@ -1,11 +1,12 @@
 package com.kodilla;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Controller {
+public class Controller implements Serializable {
 
     private static final Controller INSTANCE = new Controller();
     private Map<String, Field> fields = new HashMap<>();

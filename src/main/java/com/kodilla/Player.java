@@ -1,8 +1,10 @@
 package com.kodilla;
 
+import java.io.Serializable;
+
 import javafx.event.ActionEvent;
 
-public class Player extends ActionEvent {
+public class Player extends ActionEvent implements Serializable {
 
     PositionsHolder positionsHolder;
     Pawn p1;

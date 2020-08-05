@@ -1,6 +1,8 @@
 package com.kodilla;
 
-public enum Progress {
+import java.io.Serializable;
+
+public enum Progress implements Serializable {
     START,
     IN_PROGRESS,
     END

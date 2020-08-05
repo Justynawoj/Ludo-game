@@ -1,6 +1,8 @@
 package com.kodilla;
 
-public class PositionsHolder {
+import java.io.Serializable;
+
+public class PositionsHolder implements Serializable {
 
     Pawn pawn;
     Color color;

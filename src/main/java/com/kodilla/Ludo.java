@@ -395,6 +395,7 @@ public class Ludo extends Application{
                 player3,
                 YELLOW);
 
+        SaveService saveService = new SaveService(grid,controller);
 
 
 

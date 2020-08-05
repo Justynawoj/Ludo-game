@@ -2,6 +2,8 @@ package com.kodilla;
 
 import static com.kodilla.FillUtils.fill;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
@@ -9,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 
 
-public class Field extends Rectangle {
+public class Field extends Rectangle implements Serializable {
 
     private int col, row = 0;
     int position;

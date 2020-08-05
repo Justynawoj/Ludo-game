@@ -1,6 +1,8 @@
 package com.kodilla;
 
-public class Pawn {
+import java.io.Serializable;
+
+public class Pawn implements Serializable {
 
     private Player player;
     private Field field;

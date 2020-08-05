@@ -15,7 +15,7 @@ public class GameSaver implements Serializable {
     }
 
 
-    File savedHashMaps = new File("saved");
+    File savedHashMaps = new File("saved.txt");
     Map<String, Long> map = new HashMap<>();
 
     public void saveMap() {
