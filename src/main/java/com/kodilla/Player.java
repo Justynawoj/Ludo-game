@@ -9,32 +9,17 @@ public class Player extends ActionEvent {
     Pawn p2;
     Pawn p3;
     Pawn p4;
+    Pawn constant;
 
-    boolean isComputer;
 
     public PositionsHolder getPositionsHolder() {
         return positionsHolder;
     }
 
-    int newAvailablePosition1;
-    int newAvailablePosition2;
-    int newAvailablePosition3;
-    int newAvailablePosition4;
 
-    int startingPosition;
-    int endingPosition;
-    int startingWinningPosition;
-    int endingWinningPosition;
-
-    int p1HomePosition;
-    int p2HomePosition;
-    int p3HomePosition;
-    int p4HomePosition;
 
     Color color;
-    int thrownDice;
 
-    boolean computersTurn = false;
 
     public Pawn getP1() {
         return p1;
@@ -54,7 +39,7 @@ public class Player extends ActionEvent {
 
 
 
-    public Player(Field field1, Field field2, Field field3, Field field4, boolean isComputer, Color color) {
+    public Player(Field field1, Field field2, Field field3, Field field4, Field constant, Color color) {
 
         this.positionsHolder = new PositionsHolder();
         this.color = color;
@@ -65,9 +50,11 @@ public class Player extends ActionEvent {
         this.p3 = new Pawn(this, field3);
         field3.setPawn(p3);
         this.p4 = new Pawn(this, field4);
-        field4.setPawn(p4);//104
+        field4.setPawn(p4);
 
-        this.isComputer = isComputer;
+        this.constant = new Pawn(this,constant);
+        constant.setPawn(this.constant);
+
     }
 
 //    public void setPositions() {

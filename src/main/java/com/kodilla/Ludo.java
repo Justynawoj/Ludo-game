@@ -366,12 +366,25 @@ public class Ludo extends Application{
 
 
 
+        Field player1 = new Field(1,3,1000);
+        Field player2 = new Field(8,3,2000);
+        Field player4 = new Field(1,7,4000);
+        Field player3 = new Field(8, 7,3000);
+        grid.add(player1,1,3);
+        grid.add(player2,8,3);
+        grid.add(player4,1,7);
+        grid.add(player3,8,7);
+        controller.addField(player1);
+        controller.addField(player2);
+        controller.addField(player3);
+        controller.addField(player4);
+
         Player player = new Player(
                 field101,
                 field102,
                 field103,
                 field104,
-                false,
+                player1,
                 BLUE);
 
         Player comp = new Player(
@@ -379,7 +392,7 @@ public class Ludo extends Application{
                 field126,
                 field127,
                 field128,
-                true,
+                player3,
                 YELLOW);
 
 

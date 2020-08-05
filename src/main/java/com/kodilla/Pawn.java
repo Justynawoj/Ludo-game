@@ -5,7 +5,15 @@ public class Pawn {
     private Player player;
     private Field field;
     private Progress progress;
+    private boolean pawnCanMove = false;
 
+    public boolean isPawnCanMove() {
+        return pawnCanMove;
+    }
+
+    public void setPawnCanMove(boolean pawnCanMove) {
+        this.pawnCanMove = pawnCanMove;
+    }
 
     @Override
     public String toString() {
