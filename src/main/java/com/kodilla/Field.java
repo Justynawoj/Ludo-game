@@ -1,11 +1,11 @@
 package com.kodilla;
 
-import static com.kodilla.FillUtils.fill;
+import static com.kodilla.view.FillUtils.fill;
 
 import java.io.Serializable;
 
+import com.kodilla.view.Color;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -19,12 +19,7 @@ public class Field extends Rectangle implements Serializable {
 
     public Field(Image image) {
         super(65, 65, new ImagePattern(image));
-
-    /*    setOnMouseClicked(mouseEvent -> {
-            System.out.println(String.format("Element clicked col %s, row %s", -1, -1));
-            setFill(new ImagePattern(new Image("black.png",65,65,false,false)));
-        });
-  */  }
+   }
 
     public Field(int col, int row, int position) {
         super(65, 65, fill("circle.png"));

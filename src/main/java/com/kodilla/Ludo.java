@@ -1,5 +1,7 @@
 package com.kodilla;
 
+import com.kodilla.window.ConfirmBox;
+import com.kodilla.window.SaveService;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -14,8 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
-import static com.kodilla.Color.BLUE;
-import static com.kodilla.Color.YELLOW;
+import static com.kodilla.view.Color.BLUE;
+import static com.kodilla.view.Color.YELLOW;
 //import static com.kodilla.Player.startGame;
 
 public class Ludo extends Application{
@@ -34,6 +36,7 @@ public class Ludo extends Application{
     private Controller controller = Controller.getController();
 
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -44,8 +47,11 @@ public class Ludo extends Application{
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.ROUND, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
-
         GridPane grid = new GridPane();
+
+
+
+
         grid.setAlignment(Pos.TOP_CENTER);
         grid.setPadding(new Insets(15, 15, 15, 15));
         grid.setHgap(5);
@@ -366,19 +372,23 @@ public class Ludo extends Application{
 
 
 
-        Field player1 = new Field(1,3,1000);
+        Field player1 = new Field(13,4,1000);
         Field player2 = new Field(8,3,2000);
         Field player4 = new Field(1,7,4000);
-        Field player3 = new Field(8, 7,3000);
-        grid.add(player1,1,3);
+        Field player3 = new Field(13, 6,3000);
+        grid.add(player1,13,4);
         grid.add(player2,8,3);
         grid.add(player4,1,7);
-        grid.add(player3,8,7);
+        grid.add(player3,13,6);
         controller.addField(player1);
         controller.addField(player2);
         controller.addField(player3);
         controller.addField(player4);
 
+        Label playerLabel = new Label("Player");
+        Label computer = new Label("Computer");
+        grid.add(playerLabel,12,4);
+        grid.add(computer,12,6);
         Player player = new Player(
                 field101,
                 field102,
@@ -395,9 +405,26 @@ public class Ludo extends Application{
                 player3,
                 YELLOW);
 
+
+        Button newLoadButton = new Button("New load button");
+        grid.add(newLoadButton,10,9);
+
+        Button newSaveButton = new Button("New save button");
+        grid.add(newSaveButton,10,8);
+
+
+
+        //Mentor
         SaveService saveService = new SaveService(grid,controller);
 
 
+        Controller controllerReturned = saveService.loadObjectFromFile();
+       // controllerReturned.getFieldsInArray();
+        System.out.println("ja tu cos robie  " + controllerReturned);
+
+ /*       Controller loadedController = saveService.loadObjectFromFile();
+        controller = loadedController;
+*/
 
         DiceService.getInstance().addGrid(grid);
 
@@ -410,6 +437,57 @@ public class Ludo extends Application{
 
         primaryStage.show();
 
+
+        Button newGameButton = new Button("New Game");
+        grid.add(newGameButton,10,10);
+
+        newGameButton.setOnAction(e -> {
+            boolean result = ConfirmBox.display("New Game", "Are you sure you want to start over?");
+            if(result){
+
+                player.getP1().setProgress(Progress.START);
+                player.getP2().setProgress(Progress.START);
+                player.getP3().setProgress(Progress.START);
+                player.getP4().setProgress(Progress.START);
+
+                player.getP1().getField().setPawn(null);
+                player.getP2().getField().setPawn(null);
+                player.getP3().getField().setPawn(null);
+                player.getP4().getField().setPawn(null);
+
+                player.getP1().setField(field101);
+                player.getP2().setField(field102);
+                player.getP3().setField(field103);
+                player.getP4().setField(field104);
+
+                player.getP1().getField().setPawn(player.getP1());
+                player.getP2().getField().setPawn(player.getP2());
+                player.getP3().getField().setPawn(player.getP3());
+                player.getP4().getField().setPawn(player.getP4());
+
+
+                comp.getP1().setProgress(Progress.START);
+                comp.getP2().setProgress(Progress.START);
+                comp.getP3().setProgress(Progress.START);
+                comp.getP4().setProgress(Progress.START);
+
+                comp.getP1().getField().setPawn(null);
+                comp.getP2().getField().setPawn(null);
+                comp.getP3().getField().setPawn(null);
+                comp.getP4().getField().setPawn(null);
+
+                comp.getP1().setField(field125);
+                comp.getP2().setField(field126);
+                comp.getP3().setField(field127);
+                comp.getP4().setField(field128);
+
+                comp.getP1().getField().setPawn(comp.getP1());
+                comp.getP2().getField().setPawn(comp.getP2());
+                comp.getP3().getField().setPawn(comp.getP3());
+                comp.getP4().getField().setPawn(comp.getP4());
+
+            }
+        });
 
     }
 

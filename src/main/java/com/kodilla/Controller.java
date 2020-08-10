@@ -1,5 +1,8 @@
 package com.kodilla;
 
+import com.kodilla.view.Color;
+import com.kodilla.window.AlertBox;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +14,17 @@ public class Controller implements Serializable {
     private static final Controller INSTANCE = new Controller();
     private Map<String, Field> fields = new HashMap<>();
 
+    public Map<String, Field> getFields() {
+        return fields;
+    }
+
+    public ArrayList<Field> getFieldsInArray() {
+        return fieldsInArray;
+    }
+
     private ArrayList<Field> fieldsInArray = new ArrayList<>();
+
+
 
     boolean inProgressToSet;
     boolean endToSet;
@@ -27,6 +40,7 @@ public class Controller implements Serializable {
         return INSTANCE;
     }
 
+
     void addField(Field field) {
         this.fields.put(String.format("%s-%s", field.getCol(), field.getRow()), field);
         this.fieldsInArray.add(field);
@@ -37,6 +51,7 @@ public class Controller implements Serializable {
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
                 .findFirst().get();
+
         Player computer = computerField.getPawn().getPlayer();
 
 
@@ -93,6 +108,7 @@ public class Controller implements Serializable {
                 } else {
 
                     computerMove();
+                    checkIfHasWon(computer);
                 }
         GameSaver.getInstance().saveMap();
          //   }
@@ -100,6 +116,29 @@ public class Controller implements Serializable {
             System.out.println("No such move. Try again, choose correct pawn " + e.getMessage());
         }
 
+    }
+
+    public void newGame(){
+        Field computerField = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 3000)
+                .findFirst().get();
+        Player computer = computerField.getPawn().getPlayer();
+
+
+        Field playersField = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 1000)
+                .findFirst().get();
+        Player player = computerField.getPawn().getPlayer();
+
+        int playerHomePosition = player.getPositionsHolder().getHomePositions(player.getColor());
+        int computerHomePosition = computer.getPositionsHolder().getHomePositions(computer.getColor());
+
+        Field newPlayersField = fieldsInArray.stream()
+                .filter(field -> field.getPosition()==playerHomePosition)
+                .findFirst().get();
+
+        player.getP1().setField(newPlayersField);
+        player.getP1().setProgress(Progress.START);
     }
 
     public void computerMove() {
@@ -174,6 +213,8 @@ public class Controller implements Serializable {
     private void checkIfHasWon(Player player) {
         if ((player.getP1().getProgress() == Progress.END) && (player.getP2().getProgress() == Progress.END) && (player.getP3().getProgress() == Progress.END) && (player.getP4().getProgress() == Progress.END)) {
             System.out.println("Player " + player.getColor() + " has won!");
+
+            AlertBox.display("We have a winner!","Someone has won!" );
         }
     }
 

@@ -1,6 +1,6 @@
 package com.kodilla;
 
-import static com.kodilla.FillUtils.fill;
+import static com.kodilla.view.FillUtils.fill;
 
 import java.util.Random;
 

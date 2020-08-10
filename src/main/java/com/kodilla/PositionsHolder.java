@@ -1,5 +1,7 @@
 package com.kodilla;
 
+import com.kodilla.view.Color;
+
 import java.io.Serializable;
 
 public class PositionsHolder implements Serializable {

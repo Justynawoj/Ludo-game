@@ -1,4 +1,4 @@
-package com.kodilla;
+package com.kodilla.view;
 
 import java.io.Serializable;
 

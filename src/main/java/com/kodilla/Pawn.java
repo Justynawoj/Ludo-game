@@ -9,26 +9,10 @@ public class Pawn implements Serializable {
     private Progress progress;
     private boolean pawnCanMove = false;
 
-    public boolean isPawnCanMove() {
-        return pawnCanMove;
-    }
-
-    public void setPawnCanMove(boolean pawnCanMove) {
-        this.pawnCanMove = pawnCanMove;
-    }
-
-    @Override
-    public String toString() {
-        return "im a " +
-                  player.getColor() +
-                " pawn on the field no" + field.getPosition() + "My progress is "+ getProgress();
-    }
-
     public Pawn(Player player, Field field) {
         this.player = player;
         this.field = field;
         this.progress = Progress.START;
-
     }
 
     public Progress getProgress() {
@@ -50,6 +34,16 @@ public class Pawn implements Serializable {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public boolean isPawnCanMove() {
+        return pawnCanMove;
+    }
+    @Override
+    public String toString() {
+        return "im a " +
+                player.getColor() +
+                " pawn on the field no" + field.getPosition() + "My progress is "+ getProgress();
     }
 
 }
