@@ -9,5 +9,4 @@ public class FillUtils {
     public static Paint fill(String graphic){
         return new ImagePattern(new Image(graphic,70,70,false,false));
     }
-
 }

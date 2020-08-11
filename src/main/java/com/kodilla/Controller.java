@@ -2,36 +2,23 @@ package com.kodilla;
 
 import com.kodilla.view.Color;
 import com.kodilla.window.AlertBox;
+import com.kodilla.window.ConfirmBox;
+import javafx.scene.control.Button;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Controller implements Serializable {
 
     private static final Controller INSTANCE = new Controller();
     private Map<String, Field> fields = new HashMap<>();
-
-    public Map<String, Field> getFields() {
-        return fields;
-    }
-
-    public ArrayList<Field> getFieldsInArray() {
-        return fieldsInArray;
-    }
-
     private ArrayList<Field> fieldsInArray = new ArrayList<>();
-
-
-
     boolean inProgressToSet;
     boolean endToSet;
-    boolean playerDidMove = false;
-
-    public  int counter = 0;
-
 
     private Controller() {
     }
@@ -39,7 +26,6 @@ public class Controller implements Serializable {
     public static Controller getController() {
         return INSTANCE;
     }
-
 
     void addField(Field field) {
         this.fields.put(String.format("%s-%s", field.getCol(), field.getRow()), field);
@@ -51,170 +37,186 @@ public class Controller implements Serializable {
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
                 .findFirst().get();
-
         Player computer = computerField.getPawn().getPlayer();
-
 
         try {
             int diceValue = DiceService.getInstance().getDiceResult();
-
             Pawn clickedPawn = field.getPawn();
             play(clickedPawn, diceValue);
-
-
-
-            //playing time
-         /*   Field oldField = clickedPawn.getField();
-
-            int newFieldPosition = calculatePosition(clickedPawn, diceValue);
-
-            Field newField = fieldsInArray.stream()
-                    .filter(f -> f.getPosition() == newFieldPosition)
-                    .findFirst().get();
-            changeOpponentPosition( newField, clickedPawn);
-            checkIfCanMove(oldField,newField,clickedPawn);
-            movePawn(oldField,newField,clickedPawn);*/
-
-            //end of playing time
-
-
             checkIfHasWon(clickedPawn.getPlayer());
-
-
-            System.out.println(clickedPawn.getPlayer().getP1().getField().position + " " + clickedPawn.getPlayer().getP1().getProgress() + "  " + clickedPawn.getPlayer().getP2().getField().position + " " + clickedPawn.getPlayer().getP2().getProgress() + "  " + clickedPawn.getPlayer().getP3().getField().position + " " + clickedPawn.getPlayer().getP3().getProgress() + "  " + clickedPawn.getPlayer().getP4().getField().position + " " + clickedPawn.getPlayer().getP4().getProgress());
-
 
             /*
              * computerMove?
              */
-            int compDiceResult = DiceService.getInstance().thowDice();
-            System.out.println("Computer has dice value " + compDiceResult);
 
-//            if(counter == 3 || playerDidMove == true) {
-//                counter = 0;
-//                playerDidMove = false;
+            if (computer.getP1().getProgress() == Progress.START &&
+                    computer.getP2().getProgress() == Progress.START &&
+                    computer.getP3().getProgress() == Progress.START &&
+                    computer.getP4().getProgress() == Progress.START) {
 
-                if(computer.getP1().getProgress()==Progress.START &&
-                        computer.getP2().getProgress()==Progress.START &&
-                        computer.getP3().getProgress()==Progress.START &&
-                        computer.getP4().getProgress()==Progress.START) {
+                computerMove();
 
-                    computerMove();
+                computerMove();
 
-                    computerMove();
+                computerMove();
 
-                    computerMove();
+            } else {
 
-                } else {
+                computerMove();
+                checkIfHasWon(computer);
+            }
+            //  GameSaver.getInstance().saveMap();
 
-                    computerMove();
-                    checkIfHasWon(computer);
-                }
-        GameSaver.getInstance().saveMap();
-         //   }
         } catch (Exception e) {
             System.out.println("No such move. Try again, choose correct pawn " + e.getMessage());
         }
-
     }
 
-    public void newGame(){
+    public void newGame() {
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
                 .findFirst().get();
-        Player computer = computerField.getPawn().getPlayer();
-
+        Player comp = computerField.getPawn().getPlayer();
 
         Field playersField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 1000)
                 .findFirst().get();
-        Player player = computerField.getPawn().getPlayer();
+        Player player = playersField.getPawn().getPlayer();
 
-        int playerHomePosition = player.getPositionsHolder().getHomePositions(player.getColor());
-        int computerHomePosition = computer.getPositionsHolder().getHomePositions(computer.getColor());
+        player.getP1().setProgress(Progress.START);
+        player.getP2().setProgress(Progress.START);
+        player.getP3().setProgress(Progress.START);
+        player.getP4().setProgress(Progress.START);
 
-        Field newPlayersField = fieldsInArray.stream()
-                .filter(field -> field.getPosition()==playerHomePosition)
+        player.getP1().getField().setPawn(null);
+        player.getP2().getField().setPawn(null);
+        player.getP3().getField().setPawn(null);
+        player.getP4().getField().setPawn(null);
+
+        Field field101 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 101)
+                .findFirst().get();
+        Field field102 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 102)
+                .findFirst().get();
+        Field field103 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 103)
+                .findFirst().get();
+        Field field104 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 104)
                 .findFirst().get();
 
-        player.getP1().setField(newPlayersField);
-        player.getP1().setProgress(Progress.START);
+        player.getP1().setField(field101);
+        player.getP2().setField(field102);
+        player.getP3().setField(field103);
+        player.getP4().setField(field104);
+
+        player.getP1().getField().setPawn(player.getP1());
+        player.getP2().getField().setPawn(player.getP2());
+        player.getP3().getField().setPawn(player.getP3());
+        player.getP4().getField().setPawn(player.getP4());
+
+
+        comp.getP1().setProgress(Progress.START);
+        comp.getP2().setProgress(Progress.START);
+        comp.getP3().setProgress(Progress.START);
+        comp.getP4().setProgress(Progress.START);
+
+        comp.getP1().getField().setPawn(null);
+        comp.getP2().getField().setPawn(null);
+        comp.getP3().getField().setPawn(null);
+        comp.getP4().getField().setPawn(null);
+
+        Field field125 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 125)
+                .findFirst().get();
+        Field field126 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 126)
+                .findFirst().get();
+        Field field127 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 127)
+                .findFirst().get();
+        Field field128 = fieldsInArray.stream()
+                .filter(f -> f.getPosition() == 128)
+                .findFirst().get();
+
+        comp.getP1().setField(field125);
+        comp.getP2().setField(field126);
+        comp.getP3().setField(field127);
+        comp.getP4().setField(field128);
+
+        comp.getP1().getField().setPawn(comp.getP1());
+        comp.getP2().getField().setPawn(comp.getP2());
+        comp.getP3().getField().setPawn(comp.getP3());
+        comp.getP4().getField().setPawn(comp.getP4());
     }
 
     public void computerMove() {
+
+        //getting computer player from the reference field
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
                 .findFirst().get();
         Player computer = computerField.getPawn().getPlayer();
 
-
-        System.out.println("computer is moving");
         int compDiceResult = DiceService.getInstance().thowDice();
         Random randomGenerator = new Random();
         int randomNumber = randomGenerator.nextInt(4) + 1;
 
-
+        //if 6 go out from home position
         if (compDiceResult == 6 && computer.getP1().getProgress() == Progress.START) {
-            play(computer.p1, compDiceResult);
-
+            play(computer.getP1(), compDiceResult);
         } else if (compDiceResult == 6 && computer.getP2().getProgress() == Progress.START) {
-            play(computer.p2, compDiceResult);
-
+            play(computer.getP2(), compDiceResult);
         } else if (compDiceResult == 6 && computer.getP3().getProgress() == Progress.START) {
-            play(computer.p3, compDiceResult);
-
+            play(computer.getP3(), compDiceResult);
         } else if (compDiceResult == 6 && computer.getP4().getProgress() == Progress.START) {
-            play(computer.p4, compDiceResult);
+            play(computer.getP4(), compDiceResult);
         }
-
-
-       else if (randomNumber == 1 && computer.getP1().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p1, compDiceResult);
+        // if out of home position choose random pawn
+        else if (randomNumber == 1 && computer.getP1().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP1(), compDiceResult);
+        } else if (randomNumber == 2 && computer.getP2().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP2(), compDiceResult);
+        } else if (randomNumber == 3 && computer.getP3().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP3(), compDiceResult);
+        } else if (randomNumber == 4 && computer.getP4().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP4(), compDiceResult);
         }
-        else if (randomNumber == 2 && computer.getP2().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p2, compDiceResult);
+        // if chosen random pawn not in progress take first in progress available
+        else if (computer.getP1().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP1(), compDiceResult);
+        } else if (computer.getP2().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP2(), compDiceResult);
+        } else if (computer.getP3().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP3(), compDiceResult);
+        } else if (computer.getP4().getProgress() == Progress.IN_PROGRESS) {
+            play(computer.getP4(), compDiceResult);
         }
-        else if (randomNumber == 3 && computer.getP3().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p3, compDiceResult);
-        }
-        else if (randomNumber == 4 && computer.getP4().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p4, compDiceResult);
-        }
-
-        else if (computer.getP1().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p1, compDiceResult);
-
-        }
-        else if (computer.getP2().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p2, compDiceResult);
-        }
-        else if (computer.getP3().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p3, compDiceResult);
-        }
-        else if (computer.getP4().getProgress()==Progress.IN_PROGRESS) {
-            play(computer.p4, compDiceResult);
-        }
-        else if (randomNumber == 1 ) {
-            play(computer.p1, compDiceResult);
-        }
-        else if (randomNumber == 2 ) {
-            play(computer.p2, compDiceResult);
-        }
-        else if (randomNumber == 3) {
-            play(computer.p3, compDiceResult);
-        }
-        else if (randomNumber == 4) {
-            play(computer.p4, compDiceResult);
+        //if none of above available choose the casual one
+        else if (randomNumber == 1) {
+            play(computer.getP1(), compDiceResult);
+        } else if (randomNumber == 2) {
+            play(computer.getP2(), compDiceResult);
+        } else if (randomNumber == 3) {
+            play(computer.getP3(), compDiceResult);
+        } else if (randomNumber == 4) {
+            play(computer.getP4(), compDiceResult);
         }
         int playerDiceResult = DiceService.getInstance().thowDice();
-        System.out.println("Player dice: "+playerDiceResult);
+        System.out.println("Player dice: " + playerDiceResult);
     }
 
     private void checkIfHasWon(Player player) {
         if ((player.getP1().getProgress() == Progress.END) && (player.getP2().getProgress() == Progress.END) && (player.getP3().getProgress() == Progress.END) && (player.getP4().getProgress() == Progress.END)) {
             System.out.println("Player " + player.getColor() + " has won!");
 
-            AlertBox.display("We have a winner!","Someone has won!" );
+            //  AlertBox.display("We have a winner!","Someone has won!" );
+            boolean result = ConfirmBox.display("We have a winner!", "Do you want to start over?");
+            if (result) {
+                newGame();
+            }
+
         }
     }
 
@@ -230,6 +232,7 @@ public class Controller implements Serializable {
 
         changeOpponentPosition(newField, pawn);
         checkIfCanMove(oldField, newField, pawn);
+
     }
 
     public void changeOpponentPosition(Field newField, Pawn pawn) {
@@ -278,65 +281,16 @@ public class Controller implements Serializable {
 
     }
 
-
     public void checkIfCanMove(Field oldField, Field newField, Pawn pawn) {
         if (newField.getPawn() == null || newField.getPawn().getPlayer() != pawn.getPlayer()) {
             newField.setPawn(pawn);
             oldField.setPawn(null);
             pawn.setField(newField);
-            playerDidMove = true;
             if (inProgressToSet) {
                 pawn.setProgress(Progress.IN_PROGRESS);
-
             }
             if (endToSet) {
                 pawn.setProgress(Progress.END);
-
-            }
-
-
-        } else if(pawn.getPlayer().getP1().getProgress()==Progress.START &&
-                pawn.getPlayer().getP2().getProgress()==Progress.START &&
-                pawn.getPlayer().getP3().getProgress()==Progress.START &&
-                pawn.getPlayer().getP4().getProgress()==Progress.START ){
-            counter++;
-        }
-        inProgressToSet = false;
-        endToSet = false;
-    }
-
-    /*  public void checkIfCanMove(Field oldField, Field newField, Pawn pawn) {
-          if (newField.getPawn() == null || newField.getPawn().getPlayer() != pawn.getPlayer()) {
-              pawn.setPawnCanMove(true);
-   *//*           newField.setPawn(pawn);
-            oldField.setPawn(null);
-            pawn.setField(newField);
-            if (inProgressToSet) {
-                pawn.setProgress(Progress.IN_PROGRESS);
-
-            }
-            if (endToSet) {
-                pawn.setProgress(Progress.END);
-
-            }*//*
-
-        }
-     *//*   inProgressToSet = false;
-        endToSet = false;
-        return false;*//*
-    }*/
-    public void movePawn(Field oldField, Field newField, Pawn pawn) {
-        if (pawn.isPawnCanMove()) {
-            newField.setPawn(pawn);
-            oldField.setPawn(null);
-            pawn.setField(newField);
-            if (inProgressToSet) {
-                pawn.setProgress(Progress.IN_PROGRESS);
-
-            }
-            if (endToSet) {
-                pawn.setProgress(Progress.END);
-
             }
         }
         inProgressToSet = false;
@@ -379,7 +333,7 @@ public class Controller implements Serializable {
                 }
                 if (playersColor == Color.BLUE) {
                     int lastCircle = holder.getLastCircle(playersColor);
-                    System.out.println(lastCircle);
+
 
                     if (actualPosition + diceValue <= lastCircle) {
                         newPosition = actualPosition + diceValue;
@@ -399,4 +353,3 @@ public class Controller implements Serializable {
         return newPosition;
     }
 }
-

@@ -38,11 +38,34 @@ public class DiceService {
         System.out.println("Dice result " + diceResult);
 
         Label diceLabel2 = new Label(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
-        Field field200 = new Field(16, 0, 200);
-        this.grid.add(field200, 16, 0);
-        field200.setFill(fill("yellow.png"));
-        this.grid.add(diceLabel2, 16, 0, 1, 1);
+        Field field200 = new Field(13, 0, 200);
+        this.grid.add(field200, 13, 0);
 
+        field200.setFill(fill("white.png"));
+        this.grid.add(diceLabel2, 13, 0, 1, 1);
+
+        Field diceHolder = new Field(5,5,555);
+        this.grid.add(diceHolder,5,5);
+        switch (diceResult){
+            case 1:
+                diceHolder.setFill(fill("dice1.png"));
+                break;
+            case 2:
+                diceHolder.setFill(fill("dice2.png"));
+                break;
+            case 3:
+                diceHolder.setFill(fill("dice3.png"));
+                break;
+            case 4:
+                diceHolder.setFill(fill("dice4.png"));
+                break;
+            case 5:
+                diceHolder.setFill(fill("dice5.png"));
+                break;
+            case 6:
+                diceHolder.setFill(fill("dice6.png"));
+                break;
+        }
         return diceResult;
     }
 
@@ -50,7 +73,6 @@ public class DiceService {
         this.grid = grid;
         this.throwDiceButton = new Button("Throw dice");
         grid.add(throwDiceButton, 12, 1, 1, 1);
-
         throwDiceButton.setOnAction(event -> thowDice());
     }
 }

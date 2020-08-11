@@ -44,7 +44,6 @@ public class SaveService {
           //  System.out.println(controllerReturned + "controller returned");
          //
             //  controllerReturned.getFields().forEach((s, field) -> field.);
-
         //    controllerReturned2.getFieldsInArray();
          //   controllerReturned2.getFields();
 

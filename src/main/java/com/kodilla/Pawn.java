@@ -1,5 +1,9 @@
 package com.kodilla;
 
+import com.kodilla.Field;
+import com.kodilla.Player;
+import com.kodilla.Progress;
+
 import java.io.Serializable;
 
 public class Pawn implements Serializable {

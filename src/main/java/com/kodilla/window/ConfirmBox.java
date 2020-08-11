@@ -31,6 +31,7 @@ public class ConfirmBox {
             answer = true;
             window.close();
         });
+
         noButton.setOnAction(e -> {
             answer = false;
             window.close();
