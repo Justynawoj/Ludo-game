@@ -22,14 +22,6 @@ import static com.kodilla.view.Color.YELLOW;
 public class Ludo extends Application {
 
     private Image imageback = new Image("background1.png");
-/*    private Image circle = new Image("circle.png", 65, 65, false, false);
-    private Image blue = new Image("blue.png", 70, 70, false, false);
-    private Image red = new Image("red.png", 70, 70, false, false);
-    private Image yellow = new Image("yellow.png", 70, 70, false, false);
-    private Image green = new Image("green.png", 70, 70, false, false);
-    private Image black = new Image("black.png", 70, 70, false, false);
-    private Label gameOverLabel = new Label();
-    private FlowPane circles = new FlowPane(Orientation.HORIZONTAL);*/
     private Controller controller = Controller.getController();
 
 

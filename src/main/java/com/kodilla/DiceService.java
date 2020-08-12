@@ -5,7 +5,6 @@ import static com.kodilla.view.FillUtils.fill;
 import java.util.Random;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class DiceService {
@@ -27,22 +26,9 @@ public class DiceService {
         return diceResult;
     }
 
-    /**
-     * dice -> nothing
-     * play move -> move -> computer dice -> comp move
-     *
-     */
-
     public int thowDice() {
         diceResult = RANDOM.nextInt(6) + 1;
         System.out.println("Dice result " + diceResult);
-
-        Label diceLabel2 = new Label(String.format("Dice: %s", DiceService.getInstance().getDiceResult()));
-        Field field200 = new Field(13, 0, 200);
-        this.grid.add(field200, 13, 0);
-
-        field200.setFill(fill("white.png"));
-        this.grid.add(diceLabel2, 13, 0, 1, 1);
 
         Field diceHolder = new Field(5,5,555);
         this.grid.add(diceHolder,5,5);

@@ -40,6 +40,8 @@ public class Controller implements Serializable {
         Player computer = computerField.getPawn().getPlayer();
 
         try {
+
+            System.out.println("new turn");
             int diceValue = DiceService.getInstance().getDiceResult();
             Pawn clickedPawn = field.getPawn();
             play(clickedPawn, diceValue);
@@ -59,11 +61,14 @@ public class Controller implements Serializable {
                 computerMove();
 
                 computerMove();
-
+                int playerDiceResult = DiceService.getInstance().thowDice();
+                System.out.println("Player dice: " + playerDiceResult);
             } else {
 
                 computerMove();
                 checkIfHasWon(computer);
+                int playerDiceResult = DiceService.getInstance().thowDice();
+                System.out.println("Player dice: " + playerDiceResult);
             }
             //  GameSaver.getInstance().saveMap();
 
@@ -203,8 +208,7 @@ public class Controller implements Serializable {
         } else if (randomNumber == 4) {
             play(computer.getP4(), compDiceResult);
         }
-        int playerDiceResult = DiceService.getInstance().thowDice();
-        System.out.println("Player dice: " + playerDiceResult);
+
     }
 
     private void checkIfHasWon(Player player) {
