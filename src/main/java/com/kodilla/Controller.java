@@ -208,15 +208,16 @@ public class Controller implements Serializable {
     }
 
     private void checkIfHasWon(Player player) {
+        boolean result = false;
         if ((player.getP1().getProgress() == Progress.END) && (player.getP2().getProgress() == Progress.END) && (player.getP3().getProgress() == Progress.END) && (player.getP4().getProgress() == Progress.END)) {
-            System.out.println("Player " + player.getColor() + " has won!");
-
-            //  AlertBox.display("We have a winner!","Someone has won!" );
-            boolean result = ConfirmBox.display("We have a winner!", "Do you want to start over?");
+            if (player.color == Color.BLUE) {
+                result = ConfirmBox.display("Won!", "Congratulation, you Won! \nDo you want to start over?");
+            } else {
+                result = ConfirmBox.display("Game over!", "You loose! \nDo you want to start over?");
+            }
             if (result) {
                 newGame();
             }
-
         }
     }
 

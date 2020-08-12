@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 
 import static com.kodilla.view.Color.BLUE;
 import static com.kodilla.view.Color.YELLOW;
-//import static com.kodilla.Player.startGame;
+
 
 public class Ludo extends Application {
 
