@@ -1,6 +1,7 @@
-package com.kodilla;
+package com.kodilla.controller;
 
-import com.kodilla.state.Progress;
+import com.kodilla.service.DiceService;
+import com.kodilla.state.*;
 import com.kodilla.view.Color;
 import com.kodilla.window.ConfirmBox;
 
@@ -14,10 +15,10 @@ import java.util.Random;
 public class Controller implements Serializable {
 
     private static final Controller INSTANCE = new Controller();
-    private Map<String, Field> fields = new HashMap<>();
-    private ArrayList<Field> fieldsInArray = new ArrayList<>();
-    boolean inProgressToSet;
-    boolean endToSet;
+    private final Map<String, Field> fields = new HashMap<>();
+    private final ArrayList<Field> fieldsInArray = new ArrayList<>();
+    private boolean inProgressToSet;
+    private boolean endToSet;
 
     private Controller() {
     }
@@ -26,7 +27,7 @@ public class Controller implements Serializable {
         return INSTANCE;
     }
 
-    void addField(Field field) {
+    public void addField(Field field) {
         this.fields.put(String.format("%s-%s", field.getCol(), field.getRow()), field);
         this.fieldsInArray.add(field);
     }
@@ -35,7 +36,8 @@ public class Controller implements Serializable {
 
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
-                .findFirst().get();
+                .findFirst().orElse(null);
+        assert computerField != null;
         Player computer = computerField.getPawn().getPlayer();
 
         try {
@@ -71,12 +73,13 @@ public class Controller implements Serializable {
     public void newGame() {
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
-                .findFirst().get();
+                .findFirst().orElse(null);
+        assert computerField != null;
         Player comp = computerField.getPawn().getPlayer();
 
         Field playersField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 1000)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Player player = playersField.getPawn().getPlayer();
 
         player.getP1().setProgress(Progress.START);
@@ -91,16 +94,16 @@ public class Controller implements Serializable {
 
         Field field101 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 101)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field102 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 102)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field103 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 103)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field104 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 104)
-                .findFirst().get();
+                .findFirst().orElse(null);
 
         player.getP1().setField(field101);
         player.getP2().setField(field102);
@@ -124,16 +127,16 @@ public class Controller implements Serializable {
 
         Field field125 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 125)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field126 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 126)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field127 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 127)
-                .findFirst().get();
+                .findFirst().orElse(null);
         Field field128 = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 128)
-                .findFirst().get();
+                .findFirst().orElse(null);
 
         comp.getP1().setField(field125);
         comp.getP2().setField(field126);
@@ -150,7 +153,8 @@ public class Controller implements Serializable {
         //getting computer player from the reference field
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
-                .findFirst().get();
+                .findFirst().orElse(null);
+        assert computerField != null;
         Player computer = computerField.getPawn().getPlayer();
 
         int compDiceResult = DiceService.getInstance().thowDice();
@@ -200,9 +204,9 @@ public class Controller implements Serializable {
     }
 
     private void checkIfHasWon(Player player) {
-        boolean result = false;
+        boolean result;
         if ((player.getP1().getProgress() == Progress.END) && (player.getP2().getProgress() == Progress.END) && (player.getP3().getProgress() == Progress.END) && (player.getP4().getProgress() == Progress.END)) {
-            if (player.color == Color.BLUE) {
+            if (player.getColor() == Color.BLUE) {
                 result = ConfirmBox.display("Won!", "Congratulation, you Won! \nDo you want to start over?");
             } else {
                 result = ConfirmBox.display("Game over!", "You loose! \nDo you want to start over?");
@@ -219,8 +223,9 @@ public class Controller implements Serializable {
         int newFieldPosition = calculatePosition(pawn, diceValue);
         Field newField = fieldsInArray.stream()
                 .filter(field -> field.getPosition() == newFieldPosition)
-                .findFirst().get();
+                .findFirst().orElse(null);
 
+        assert newField != null;
         changeOpponentPosition(newField, pawn);
         checkIfCanMove(oldField, newField, pawn);
 
@@ -237,16 +242,16 @@ public class Controller implements Serializable {
 
                     Field firstHomePosition = fieldsInArray.stream()
                             .filter(field -> field.getPosition() == newPositionOfOpponent)
-                            .findFirst().get();
+                            .findFirst().orElse(null);
                     Field secondHomePosition = fieldsInArray.stream()
                             .filter(field -> field.getPosition() == newPositionOfOpponent + 1)
-                            .findFirst().get();
+                            .findFirst().orElse(null);
                     Field thirdHomePosition = fieldsInArray.stream()
                             .filter(field -> field.getPosition() == newPositionOfOpponent + 2)
-                            .findFirst().get();
+                            .findFirst().orElse(null);
                     Field fourthHomePosition = fieldsInArray.stream()
                             .filter(field -> field.getPosition() == newPositionOfOpponent + 3)
-                            .findFirst().get();
+                            .findFirst().orElse(null);
                     Field newFieldOfOpponent = secondHomePosition;
                     if (firstHomePosition.getPawn() == null) {
                         newFieldOfOpponent = firstHomePosition;

@@ -1,5 +1,6 @@
-package com.kodilla;
+package com.kodilla.state;
 
+import com.kodilla.controller.Controller;
 import com.kodilla.view.Color;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;

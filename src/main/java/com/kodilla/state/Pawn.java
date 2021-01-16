@@ -1,6 +1,4 @@
-package com.kodilla;
-
-import com.kodilla.state.Progress;
+package com.kodilla.state;
 
 import java.io.Serializable;
 

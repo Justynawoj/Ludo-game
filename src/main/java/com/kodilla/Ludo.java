@@ -1,5 +1,9 @@
 package com.kodilla;
 
+import com.kodilla.controller.Controller;
+import com.kodilla.service.DiceService;
+import com.kodilla.state.Field;
+import com.kodilla.state.Player;
 import com.kodilla.window.ConfirmBox;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,17 +22,17 @@ import static com.kodilla.view.Color.YELLOW;
 
 public class Ludo extends Application {
 
-    private Image imageback = new Image("background1.png");
-    private Controller controller = Controller.getController();
+    private final Image imageBackground = new Image("background1.png");
+    private final Controller controller = Controller.getController();
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         BackgroundSize backgroundSize = new BackgroundSize(100, 100, true, true, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.ROUND, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        BackgroundImage backgroundImage = new BackgroundImage(imageBackground, BackgroundRepeat.ROUND, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
         GridPane grid = new GridPane();

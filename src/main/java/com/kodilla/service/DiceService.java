@@ -1,5 +1,6 @@
-package com.kodilla;
+package com.kodilla.service;
 
+import com.kodilla.state.Field;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 

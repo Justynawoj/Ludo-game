@@ -1,4 +1,4 @@
-package com.kodilla;
+package com.kodilla.state;
 
 import com.kodilla.view.Color;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class PositionsHolder implements Serializable {
 
-    int getHomePositions(Color color) {
+    public int getHomePositions(Color color) {
         int position = 0;
         switch (color) {
             case BLUE:
@@ -25,7 +25,7 @@ public class PositionsHolder implements Serializable {
         return position;
     }
 
-    int getFirstCircle(Color color) {
+    public int getFirstCircle(Color color) {
         int position = 0;
         switch (color) {
             case BLUE:
@@ -44,7 +44,7 @@ public class PositionsHolder implements Serializable {
         return position;
     }
 
-    int getLastCircle(Color color) {
+    public int getLastCircle(Color color) {
         int position = 0;
         switch (color) {
             case BLUE:
@@ -63,7 +63,7 @@ public class PositionsHolder implements Serializable {
         return position;
     }
 
-    int getLastWinningPosition(Color color) {
+    public int getLastWinningPosition(Color color) {
         int position = 0;
         switch (color) {
             case BLUE:
