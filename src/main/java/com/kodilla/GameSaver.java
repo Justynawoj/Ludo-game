@@ -7,6 +7,7 @@ import java.util.Map;
 public class GameSaver implements Serializable {
 
     private static final GameSaver INSTANCE = new GameSaver();
+
     public static GameSaver getInstance() {
         return INSTANCE;
     }
@@ -20,7 +21,7 @@ public class GameSaver implements Serializable {
 
     public void saveMap() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream (new FileOutputStream(savedHashMaps));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(savedHashMaps));
             oos.writeObject(map);
             oos.close();
         } catch (Exception e) {
@@ -32,7 +33,7 @@ public class GameSaver implements Serializable {
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(savedHashMaps));
             Object readMap = ois.readObject();
-            if(readMap instanceof HashMap) {
+            if (readMap instanceof HashMap) {
                 map.putAll((HashMap) readMap);
             }
             ois.close();

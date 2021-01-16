@@ -10,17 +10,11 @@ public class SaveService {
 
     private GridPane gridPane;
     private Button saveButton;
-
-
-
     private Button loadButton;
     static Controller controllerReturned2;
 
 
-
-
-    //public Controller SaveService(GridPane gridPane, Controller controller) {
-    public  SaveService(GridPane gridPane, Controller controller) {
+    public SaveService(GridPane gridPane, Controller controller) {
         this.gridPane = gridPane;
         saveButton = new Button();
         saveButton.setOnAction(actionEvent -> {
@@ -29,23 +23,18 @@ public class SaveService {
             System.out.println(controller);
             controllerReturned2 = controller;
 
-            System.out.println(controllerReturned2 + "saved gius");
+            System.out.println(controllerReturned2 + "saved ");
         });
         saveButton.setText("SAVE");
 
         loadButton = new Button();
         loadButton.setOnAction(actionEvent -> {
             System.out.println("load !");
-             Controller controllerReturned = loadObjectFromFile();
+            Controller controllerReturned = loadObjectFromFile();
             controllerReturned2 = controllerReturned;
 
-            System.out.println(controllerReturned2 + "loaded gius");
+            System.out.println(controllerReturned2 + "loaded ");
 
-          //  System.out.println(controllerReturned + "controller returned");
-         //
-            //  controllerReturned.getFields().forEach((s, field) -> field.);
-        //    controllerReturned2.getFieldsInArray();
-         //   controllerReturned2.getFields();
 
         });
         loadButton.setText("LOAD");
@@ -53,7 +42,6 @@ public class SaveService {
         gridPane.add(saveButton, 11, 8);
         gridPane.add(loadButton, 12, 8);
 
-     //   return controllerReturned2;
     }
 
     public void writeObjectToFile(Object serObj) {
@@ -85,7 +73,7 @@ public class SaveService {
             // Read object
             Controller controller = (Controller) oi.readObject();
             System.out.println(controller + "controller readed");
-           // System.out.println("object has been loaded gius");
+
 
             oi.close();
             fi.close();

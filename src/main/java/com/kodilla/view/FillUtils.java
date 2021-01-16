@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
 
 public class FillUtils {
 
-    public static Paint fill(String graphic){
-        return new ImagePattern(new Image(graphic,70,70,false,false));
+    public static Paint fill(String graphic) {
+        return new ImagePattern(new Image(graphic, 70, 70, false, false));
     }
 }

@@ -11,10 +11,9 @@ public class PositionsHolder implements Serializable {
     Progress progress;
 
 
-
-    int getHomePositions(Color color){
+    int getHomePositions(Color color) {
         int position = 0;
-        switch (color){
+        switch (color) {
             case BLUE:
                 position = 101;
                 break;
@@ -30,6 +29,7 @@ public class PositionsHolder implements Serializable {
         }
         return position;
     }
+
     int getFirstCircle(Color color) {
         int position = 0;
         switch (color) {
@@ -48,6 +48,7 @@ public class PositionsHolder implements Serializable {
         }
         return position;
     }
+
     int getLastCircle(Color color) {
         int position = 0;
         switch (color) {
@@ -85,6 +86,7 @@ public class PositionsHolder implements Serializable {
         }
         return position;
     }
+
     int getLastWinningPosition(Color color) {
         int position = 0;
         switch (color) {

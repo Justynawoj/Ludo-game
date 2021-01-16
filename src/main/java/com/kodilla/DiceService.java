@@ -30,9 +30,9 @@ public class DiceService {
         diceResult = RANDOM.nextInt(6) + 1;
         System.out.println("Dice result " + diceResult);
 
-        Field diceHolder = new Field(5,5,555);
-        this.grid.add(diceHolder,5,5);
-        switch (diceResult){
+        Field diceHolder = new Field(5, 5, 555);
+        this.grid.add(diceHolder, 5, 5);
+        switch (diceResult) {
             case 1:
                 diceHolder.setFill(fill("dice1.png"));
                 break;

@@ -43,11 +43,12 @@ public class Pawn implements Serializable {
     public boolean isPawnCanMove() {
         return pawnCanMove;
     }
+
     @Override
     public String toString() {
         return "im a " +
                 player.getColor() +
-                " pawn on the field no" + field.getPosition() + "My progress is "+ getProgress();
+                " pawn on the field no" + field.getPosition() + "My progress is " + getProgress();
     }
 
 }
