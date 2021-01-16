@@ -1,17 +1,14 @@
 package com.kodilla;
 
-import com.kodilla.Field;
-import com.kodilla.Player;
-import com.kodilla.Progress;
+import com.kodilla.state.Progress;
 
 import java.io.Serializable;
 
 public class Pawn implements Serializable {
 
-    private Player player;
+    private final Player player;
     private Field field;
     private Progress progress;
-    private boolean pawnCanMove = false;
 
     public Pawn(Player player, Field field) {
         this.player = player;
@@ -33,15 +30,10 @@ public class Pawn implements Serializable {
 
     public void setField(Field field) {
         this.field = field;
-
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public boolean isPawnCanMove() {
-        return pawnCanMove;
     }
 
     @Override

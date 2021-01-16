@@ -1,16 +1,15 @@
 package com.kodilla;
 
+import com.kodilla.state.Progress;
 import com.kodilla.view.Color;
-import com.kodilla.window.AlertBox;
 import com.kodilla.window.ConfirmBox;
-import javafx.scene.control.Button;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
 
 public class Controller implements Serializable {
 
@@ -47,31 +46,23 @@ public class Controller implements Serializable {
             play(clickedPawn, diceValue);
             checkIfHasWon(clickedPawn.getPlayer());
 
-            /*
-             * computerMove?
-             */
-
             if (computer.getP1().getProgress() == Progress.START &&
                     computer.getP2().getProgress() == Progress.START &&
                     computer.getP3().getProgress() == Progress.START &&
                     computer.getP4().getProgress() == Progress.START) {
 
                 computerMove();
-
+                computerMove();
                 computerMove();
 
-                computerMove();
                 int playerDiceResult = DiceService.getInstance().thowDice();
                 System.out.println("Player dice: " + playerDiceResult);
             } else {
-
                 computerMove();
                 checkIfHasWon(computer);
                 int playerDiceResult = DiceService.getInstance().thowDice();
                 System.out.println("Player dice: " + playerDiceResult);
             }
-            //  GameSaver.getInstance().saveMap();
-
         } catch (Exception e) {
             System.out.println("No such move. Try again, choose correct pawn " + e.getMessage());
         }
@@ -121,7 +112,6 @@ public class Controller implements Serializable {
         player.getP3().getField().setPawn(player.getP3());
         player.getP4().getField().setPawn(player.getP4());
 
-
         comp.getP1().setProgress(Progress.START);
         comp.getP2().setProgress(Progress.START);
         comp.getP3().setProgress(Progress.START);
@@ -157,7 +147,6 @@ public class Controller implements Serializable {
     }
 
     public void computerMove() {
-
         //getting computer player from the reference field
         Field computerField = fieldsInArray.stream()
                 .filter(f -> f.getPosition() == 3000)
@@ -208,7 +197,6 @@ public class Controller implements Serializable {
         } else if (randomNumber == 4) {
             play(computer.getP4(), compDiceResult);
         }
-
     }
 
     private void checkIfHasWon(Player player) {
@@ -228,9 +216,7 @@ public class Controller implements Serializable {
     private void play(Pawn pawn, int diceValue) {
 
         Field oldField = pawn.getField();
-
         int newFieldPosition = calculatePosition(pawn, diceValue);
-
         Field newField = fieldsInArray.stream()
                 .filter(field -> field.getPosition() == newFieldPosition)
                 .findFirst().get();
@@ -243,15 +229,11 @@ public class Controller implements Serializable {
     public void changeOpponentPosition(Field newField, Pawn pawn) {
         if (newField.getPawn() != null) {
             if (newField.getPawn().getPlayer() != pawn.getPlayer()) {
-
-
                 if (newField.getPawn().getPlayer().getColor() != pawn.getPlayer().getColor()) {
 
                     Pawn opponentPawn = newField.getPawn();
-
                     opponentPawn.setProgress(Progress.START);
                     int newPositionOfOpponent = opponentPawn.getPlayer().getPositionsHolder().getHomePositions(opponentPawn.getPlayer().getColor());
-
 
                     Field firstHomePosition = fieldsInArray.stream()
                             .filter(field -> field.getPosition() == newPositionOfOpponent)
@@ -268,7 +250,6 @@ public class Controller implements Serializable {
                     Field newFieldOfOpponent = secondHomePosition;
                     if (firstHomePosition.getPawn() == null) {
                         newFieldOfOpponent = firstHomePosition;
-
                     } else if (secondHomePosition.getPawn() == null) {
                         newFieldOfOpponent = secondHomePosition;
                     } else if (thirdHomePosition.getPawn() == null) {
@@ -283,7 +264,6 @@ public class Controller implements Serializable {
                 }
             }
         }
-
     }
 
     public void checkIfCanMove(Field oldField, Field newField, Pawn pawn) {
@@ -332,14 +312,11 @@ public class Controller implements Serializable {
                         } else if (actualPosition + diceValue + 50 <= holder.getLastWinningPosition(playersColor)) {
                             newPosition = actualPosition + diceValue + 50;
                             endToSet = true;
-
                         }
                     }
                 }
                 if (playersColor == Color.BLUE) {
                     int lastCircle = holder.getLastCircle(playersColor);
-
-
                     if (actualPosition + diceValue <= lastCircle) {
                         newPosition = actualPosition + diceValue;
                     } else if (actualPosition + diceValue > lastCircle) {

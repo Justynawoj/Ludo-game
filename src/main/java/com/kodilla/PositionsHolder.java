@@ -6,11 +6,6 @@ import java.io.Serializable;
 
 public class PositionsHolder implements Serializable {
 
-    Pawn pawn;
-    Color color;
-    Progress progress;
-
-
     int getHomePositions(Color color) {
         int position = 0;
         switch (color) {
@@ -68,25 +63,6 @@ public class PositionsHolder implements Serializable {
         return position;
     }
 
-    int getWinningPosition(Color color) {
-        int position = 0;
-        switch (color) {
-            case BLUE:
-                position = 91;
-                break;
-            case RED:
-                position = 61;
-                break;
-            case YELLOW:
-                position = 71;
-                break;
-            case GREEN:
-                position = 81;
-
-        }
-        return position;
-    }
-
     int getLastWinningPosition(Color color) {
         int position = 0;
         switch (color) {
@@ -101,7 +77,6 @@ public class PositionsHolder implements Serializable {
                 break;
             case GREEN:
                 position = 84;
-
         }
         return position;
     }

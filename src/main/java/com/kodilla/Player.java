@@ -53,7 +53,6 @@ public class Player extends ActionEvent implements Serializable {
         return p4;
     }
 
-
     public Color getColor() {
         return color;
     }

@@ -1,18 +1,17 @@
 package com.kodilla;
 
-import static com.kodilla.view.FillUtils.fill;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 
 import java.util.Random;
 
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import static com.kodilla.view.FillUtils.fill;
 
 public class DiceService {
 
     private static final Random RANDOM = new Random();
     private static final DiceService INSTANCE = new DiceService();
     private int diceResult;
-    private Button throwDiceButton;
     private GridPane grid;
 
     public static DiceService getInstance() {
@@ -57,7 +56,7 @@ public class DiceService {
 
     public void addGrid(GridPane grid) {
         this.grid = grid;
-        this.throwDiceButton = new Button("Throw dice");
+        Button throwDiceButton = new Button("Throw dice");
         grid.add(throwDiceButton, 12, 1, 1, 1);
         throwDiceButton.setOnAction(event -> thowDice());
     }

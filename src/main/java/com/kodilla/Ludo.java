@@ -1,29 +1,25 @@
 package com.kodilla;
 
 import com.kodilla.window.ConfirmBox;
-import com.kodilla.window.SaveService;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 
 import static com.kodilla.view.Color.BLUE;
 import static com.kodilla.view.Color.YELLOW;
-
 
 public class Ludo extends Application {
 
     private Image imageback = new Image("background1.png");
     private Controller controller = Controller.getController();
-
 
     public static void main(String[] args) {
         launch(args);
@@ -348,7 +344,6 @@ public class Ludo extends Application {
         controller.addField(pawnRed3);
         controller.addField(pawnRed4);
 
-
         Field player1 = new Field(13, 4, 1000);
         Field player2 = new Field(8, 3, 2000);
         Field player4 = new Field(1, 7, 4000);
@@ -382,28 +377,17 @@ public class Ludo extends Application {
                 player3,
                 YELLOW);
 
-        Button newLoadButton = new Button("New load button");
-        grid.add(newLoadButton, 10, 9);
-
-        Button newSaveButton = new Button("New save button");
-        grid.add(newSaveButton, 10, 8);
-
         Button newGameButton = new Button("New Game");
         grid.add(newGameButton, 10, 10);
 
         newGameButton.setOnAction(e -> {
-
             boolean result = ConfirmBox.display("New Game", "Are you sure you want to start over?");
             if (result) {
                 Controller.getController().newGame();
             }
         });
 
-        //Mentor
-        SaveService saveService = new SaveService(grid, controller);
-
         DiceService.getInstance().addGrid(grid);
-
         Scene scene = new Scene(grid, 1600, 800, Color.BLACK);
         primaryStage.setTitle("LUDO GAME");
         primaryStage.setScene(scene);
